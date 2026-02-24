@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.json">
+  <title>Reforma - Gestao</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <h1 id="header-title">Painel</h1>
+    <div class="header-actions">
+      <button class="header-btn" id="btn-theme" title="Tema escuro/claro">&#9790;</button>
+      <button class="header-btn" id="btn-backup" title="Backup">&#9776;</button>
+    </div>
+  </header>
+
+  <!-- ===== DASHBOARD ===== -->
+  <section class="page active" id="page-dashboard">
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="label">Total Gasto</div>
+        <div class="value" id="dash-total-gasto">R$ 0,00</div>
+      </div>
+      <div class="summary-card">
+        <div class="label">Orcamento Restante</div>
+        <div class="value success" id="dash-orcamento-restante">R$ 0,00</div>
+      </div>
+      <div class="summary-card">
+        <div class="label">Progresso</div>
+        <div class="value" id="dash-progresso">0%</div>
+      </div>
+      <div class="summary-card">
+        <div class="label">Mat. Pendentes</div>
+        <div class="value" id="dash-mat-pendentes">0</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Orcamento por Comodo</span>
+        <button class="btn-icon" onclick="App.openOrcamentoModal()" title="Editar orcamento">&#9998;</button>
+      </div>
+      <div id="dash-orcamento-progress"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span class="card-title">Gasto por Comodo</span></div>
+      <div class="bar-chart" id="dash-chart-comodo"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span class="card-title">Gasto por Categoria</span></div>
+      <div class="bar-chart" id="dash-chart-categoria"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span class="card-title">Proximas Tarefas</span></div>
+      <div id="dash-proximas-tarefas"></div>
+    </div>
+  </section>
+
+  <!-- ===== GASTOS ===== -->
+  <section class="page" id="page-gastos">
+    <div class="card">
+      <div class="flex-between mb-8">
+        <div>
+          <div class="text-lg fw-bold" id="gastos-total">R$ 0,00</div>
+          <div class="text-sm text-muted" id="gastos-count">0 registro(s)</div>
+        </div>
+        <button class="btn btn-secondary" onclick="Recibos.scan()" style="width:auto;padding:8px 14px;font-size:0.8rem">
+          &#128247; Escanear Recibo
+        </button>
+      </div>
+
+      <div class="filter-bar" id="gastos-filtro-comodo">
+        <button class="filter-chip active" data-value="todos">Todos</button>
+        <button class="filter-chip" data-value="churrasqueira">Churrasqueira</button>
+        <button class="filter-chip" data-value="banheiro">Banheiro</button>
+        <button class="filter-chip" data-value="quarto">Quarto</button>
+        <button class="filter-chip" data-value="geral">Geral</button>
+      </div>
+
+      <div class="filter-bar" id="gastos-filtro-categoria">
+        <button class="filter-chip active" data-value="todos">Todos</button>
+        <button class="filter-chip" data-value="material">Material</button>
+        <button class="filter-chip" data-value="mao-de-obra">Mao de Obra</button>
+        <button class="filter-chip" data-value="frete">Frete</button>
+        <button class="filter-chip" data-value="ferramentas">Ferramentas</button>
+        <button class="filter-chip" data-value="outros">Outros</button>
+      </div>
+
+      <div id="gastos-lista"></div>
+    </div>
+  </section>
+
+  <!-- ===== MATERIAIS ===== -->
+  <section class="page" id="page-materiais">
+    <div class="card">
+      <div class="flex-between mb-8">
+        <div>
+          <div class="text-sm text-muted">Previsto: <strong id="materiais-total-previsto">R$ 0,00</strong></div>
+          <div class="text-sm text-muted">Comprado: <strong id="materiais-total-comprado">R$ 0,00</strong></div>
+        </div>
+        <button class="btn btn-secondary" onclick="Calculadora.openModal()" style="width:auto;padding:8px 14px;font-size:0.8rem">
+          &#128208; Calculadora
+        </button>
+      </div>
+      <div class="text-sm text-muted mb-8" id="materiais-count">0 item(s)</div>
+
+      <div class="filter-bar" id="materiais-filtro-comodo">
+        <button class="filter-chip active" data-value="todos">Todos</button>
+        <button class="filter-chip" data-value="churrasqueira">Churrasqueira</button>
+        <button class="filter-chip" data-value="banheiro">Banheiro</button>
+        <button class="filter-chip" data-value="quarto">Quarto</button>
+      </div>
+
+      <div class="filter-bar" id="materiais-filtro-status">
+        <button class="filter-chip active" data-value="todos">Todos</button>
+        <button class="filter-chip" data-value="pendente">Pendente</button>
+        <button class="filter-chip" data-value="comprado">Comprado</button>
+        <button class="filter-chip" data-value="entregue">Entregue</button>
+        <button class="filter-chip" data-value="aplicado">Aplicado</button>
+      </div>
+
+      <div id="materiais-lista"></div>
+    </div>
+  </section>
+
+  <!-- ===== MÃO DE OBRA ===== -->
+  <section class="page" id="page-mao-de-obra">
+    <div class="card">
+      <div class="flex-between mb-8">
+        <div>
+          <div class="text-lg fw-bold" id="mdo-total">R$ 0,00</div>
+          <div class="text-sm text-muted" id="mdo-count">0 profissional(is)</div>
+        </div>
+      </div>
+
+      <div class="filter-bar" id="mdo-tabs">
+        <button class="filter-chip active" data-value="profissionais">Profissionais</button>
+        <button class="filter-chip" data-value="pagamentos">Pagamentos</button>
+      </div>
+
+      <div id="mdo-lista"></div>
+    </div>
+  </section>
+
+  <!-- ===== CRONOGRAMA ===== -->
+  <section class="page" id="page-cronograma">
+    <div class="card">
+      <div class="flex-between mb-8">
+        <div>
+          <div class="text-lg fw-bold" id="crono-progresso">0%</div>
+          <div class="text-sm text-muted" id="crono-count">0/0 concluida(s)</div>
+        </div>
+      </div>
+
+      <div id="crono-progress-comodos" class="mb-16"></div>
+
+      <div class="filter-bar" id="crono-filtro-comodo">
+        <button class="filter-chip active" data-value="todos">Todos</button>
+        <button class="filter-chip" data-value="churrasqueira">Churrasqueira</button>
+        <button class="filter-chip" data-value="banheiro">Banheiro</button>
+        <button class="filter-chip" data-value="quarto">Quarto</button>
+      </div>
+
+      <div class="filter-bar" id="crono-filtro-status">
+        <button class="filter-chip active" data-value="todos">Todos</button>
+        <button class="filter-chip" data-value="pendente">Pendente</button>
+        <button class="filter-chip" data-value="em andamento">Em Andamento</button>
+        <button class="filter-chip" data-value="concluido">Concluido</button>
+        <button class="filter-chip" data-value="atrasado">Atrasado</button>
+      </div>
+
+      <div id="crono-lista"></div>
+    </div>
+  </section>
+
+  <!-- ===== MAIS ===== -->
+  <section class="page" id="page-mais">
+    <!-- Menu principal -->
+    <div id="mais-menu">
+      <div class="mais-grid">
+        <div class="mais-item" onclick="App.navigateSub('planta-fotos')">
+          <span class="mais-icon">&#128506;</span>
+          <span class="mais-label">Planta & Fotos</span>
+          <span class="mais-desc">Planta baixa e fotos de progresso</span>
+        </div>
+        <div class="mais-item" onclick="App.navigateSub('recibos')">
+          <span class="mais-icon">&#128433;</span>
+          <span class="mais-label">Recibos OCR</span>
+          <span class="mais-desc">Escanear recibos automaticamente</span>
+        </div>
+        <div class="mais-item" onclick="App.navigateSub('fornecedores')">
+          <span class="mais-icon">&#127978;</span>
+          <span class="mais-label">Fornecedores</span>
+          <span class="mais-desc">Cadastro e cotacoes</span>
+        </div>
+        <div class="mais-item" onclick="App.navigateSub('comparativo')">
+          <span class="mais-icon">&#128200;</span>
+          <span class="mais-label">Comparativo</span>
+          <span class="mais-desc">Comparar precos por material</span>
+        </div>
+        <div class="mais-item" onclick="App.navigateSub('lista-compras')">
+          <span class="mais-icon">&#128722;</span>
+          <span class="mais-label">Lista de Compras</span>
+          <span class="mais-desc">Gerar lista dos pendentes</span>
+        </div>
+        <div class="mais-item" onclick="Calculadora.openModal()">
+          <span class="mais-icon">&#128208;</span>
+          <span class="mais-label">Calculadora</span>
+          <span class="mais-desc">Calcular materiais por area</span>
+        </div>
+        <div class="mais-item" onclick="Relatorio.gerar()">
+          <span class="mais-icon">&#128196;</span>
+          <span class="mais-label">Relatorio PDF</span>
+          <span class="mais-desc">Exportar relatorio completo</span>
+        </div>
+        <div class="mais-item" onclick="App.openBackupModal()">
+          <span class="mais-icon">&#128190;</span>
+          <span class="mais-label">Backup</span>
+          <span class="mais-desc">Exportar / importar dados</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sub: Planta & Fotos -->
+    <div class="sub-page" id="sub-planta-fotos">
+      <div class="sub-header">
+        <button class="sub-back" onclick="App.backToMais()">&#8592;</button>
+        <h2 style="font-size:1rem">Planta & Fotos</h2>
+      </div>
+
+      <div class="filter-bar" id="pf-tabs">
+        <button class="filter-chip active" data-value="churrasqueira">Churrasqueira</button>
+        <button class="filter-chip" data-value="banheiro">Banheiro</button>
+        <button class="filter-chip" data-value="quarto">Quarto</button>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><span class="card-title">Planta Baixa</span></div>
+        <div id="pf-planta"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Fotos de Progresso</span>
+          <button class="btn-icon" onclick="PlantaFotos.uploadFoto()" title="Adicionar foto">+</button>
+        </div>
+        <div id="pf-fotos"></div>
+      </div>
+    </div>
+
+    <!-- Sub: Recibos -->
+    <div class="sub-page" id="sub-recibos">
+      <div class="sub-header">
+        <button class="sub-back" onclick="App.backToMais()">&#8592;</button>
+        <h2 style="font-size:1rem">Recibos Escaneados</h2>
+      </div>
+
+      <div id="ocr-loading" class="ocr-loading hidden">
+        <div class="spinner"></div>
+        <p class="text-sm mt-8" id="ocr-progress-text">Processando...</p>
+      </div>
+
+      <div class="card">
+        <div id="recibos-lista"></div>
+      </div>
+    </div>
+
+    <!-- Sub: Fornecedores -->
+    <div class="sub-page" id="sub-fornecedores">
+      <div class="sub-header">
+        <button class="sub-back" onclick="App.backToMais()">&#8592;</button>
+        <h2 style="font-size:1rem">Fornecedores</h2>
+      </div>
+
+      <div class="card">
+        <div class="text-sm text-muted mb-8" id="fornecedores-count">0 fornecedor(es)</div>
+        <div id="fornecedores-lista"></div>
+      </div>
+    </div>
+
+    <!-- Sub: Comparativo -->
+    <div class="sub-page" id="sub-comparativo">
+      <div class="sub-header">
+        <button class="sub-back" onclick="App.backToMais()">&#8592;</button>
+        <h2 style="font-size:1rem">Comparativo de Precos</h2>
+      </div>
+
+      <div id="comparativo-lista"></div>
+    </div>
+
+    <!-- Sub: Lista de Compras -->
+    <div class="sub-page" id="sub-lista-compras">
+      <div class="sub-header">
+        <button class="sub-back" onclick="App.backToMais()">&#8592;</button>
+        <h2 style="font-size:1rem">Lista de Compras</h2>
+        <button class="btn btn-secondary" onclick="ListaCompras.compartilhar()" style="width:auto;padding:6px 12px;font-size:0.75rem;margin-left:auto">
+          Compartilhar
+        </button>
+      </div>
+
+      <div id="lista-compras-content"></div>
+    </div>
+  </section>
+
+  <!-- ===== NAVEGAÇÃO BOTTOM ===== -->
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-page="dashboard">
+      <span class="nav-icon">&#127968;</span>
+      <span>Painel</span>
+    </button>
+    <button class="nav-item" data-page="gastos">
+      <span class="nav-icon">&#128176;</span>
+      <span>Gastos</span>
+    </button>
+    <button class="nav-item" data-page="materiais">
+      <span class="nav-icon">&#128230;</span>
+      <span>Materiais</span>
+    </button>
+    <button class="nav-item" data-page="mao-de-obra">
+      <span class="nav-icon">&#128119;</span>
+      <span>M. Obra</span>
+    </button>
+    <button class="nav-item" data-page="cronograma">
+      <span class="nav-icon">&#128197;</span>
+      <span>Cronograma</span>
+    </button>
+    <button class="nav-item" data-page="mais">
+      <span class="nav-icon">&#8943;</span>
+      <span>Mais</span>
+    </button>
+  </nav>
+
+  <!-- FAB -->
+  <button class="fab hidden" id="fab" title="Adicionar">+</button>
+
+  <!-- ===== MODAIS ===== -->
+
+  <!-- Modal: Novo Gasto -->
+  <div class="modal-overlay" id="modal-gasto">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modal-gasto-title">Novo Gasto</h2>
+        <button class="modal-close" onclick="Modal.close('modal-gasto')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-gasto" onsubmit="event.preventDefault(); Gastos.save()">
+          <div class="form-group">
+            <label for="gasto-descricao">Descricao</label>
+            <input type="text" id="gasto-descricao" class="form-control" placeholder="Ex: Cimento, Azulejo..." required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="gasto-valor">Valor (R$)</label>
+              <input type="number" id="gasto-valor" class="form-control" step="0.01" min="0" placeholder="0,00" required>
+            </div>
+            <div class="form-group">
+              <label for="gasto-data">Data</label>
+              <input type="date" id="gasto-data" class="form-control">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="gasto-categoria">Categoria</label>
+              <select id="gasto-categoria" class="form-control">
+                <option value="material">Material</option>
+                <option value="mao-de-obra">Mao de Obra</option>
+                <option value="frete">Frete</option>
+                <option value="ferramentas">Ferramentas</option>
+                <option value="outros">Outros</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="gasto-comodo">Comodo</label>
+              <select id="gasto-comodo" class="form-control">
+                <option value="churrasqueira">Churrasqueira</option>
+                <option value="banheiro">Banheiro</option>
+                <option value="quarto">Quarto</option>
+                <option value="geral">Geral</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="gasto-pagamento">Forma de Pagamento</label>
+            <select id="gasto-pagamento" class="form-control">
+              <option value="dinheiro">Dinheiro</option>
+              <option value="pix">PIX</option>
+              <option value="cartao-debito">Cartao Debito</option>
+              <option value="cartao-credito">Cartao Credito</option>
+              <option value="transferencia">Transferencia</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Novo Material -->
+  <div class="modal-overlay" id="modal-material">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modal-material-title">Novo Material</h2>
+        <button class="modal-close" onclick="Modal.close('modal-material')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-material" onsubmit="event.preventDefault(); Materiais.save()">
+          <div class="form-group">
+            <label for="mat-nome">Nome do Material</label>
+            <input type="text" id="mat-nome" class="form-control" placeholder="Ex: Cimento CP-II" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="mat-quantidade">Quantidade</label>
+              <input type="number" id="mat-quantidade" class="form-control" step="0.01" min="0" placeholder="0">
+            </div>
+            <div class="form-group">
+              <label for="mat-unidade">Unidade</label>
+              <select id="mat-unidade" class="form-control">
+                <option value="un">Unidade</option>
+                <option value="kg">Kg</option>
+                <option value="m">Metro</option>
+                <option value="m2">m2</option>
+                <option value="m3">m3</option>
+                <option value="saco">Saco</option>
+                <option value="lata">Lata</option>
+                <option value="cx">Caixa</option>
+                <option value="pct">Pacote</option>
+                <option value="rolo">Rolo</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="mat-preco">Preco Unitario (R$)</label>
+              <input type="number" id="mat-preco" class="form-control" step="0.01" min="0" placeholder="0,00">
+            </div>
+            <div class="form-group">
+              <label for="mat-comodo">Comodo</label>
+              <select id="mat-comodo" class="form-control">
+                <option value="churrasqueira">Churrasqueira</option>
+                <option value="banheiro">Banheiro</option>
+                <option value="quarto">Quarto</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="mat-status">Status</label>
+            <select id="mat-status" class="form-control">
+              <option value="pendente">Pendente</option>
+              <option value="comprado">Comprado</option>
+              <option value="entregue">Entregue</option>
+              <option value="aplicado">Aplicado</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Novo Profissional -->
+  <div class="modal-overlay" id="modal-profissional">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modal-profissional-title">Novo Profissional</h2>
+        <button class="modal-close" onclick="Modal.close('modal-profissional')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-profissional" onsubmit="event.preventDefault(); MaoDeObra.save()">
+          <div class="form-group">
+            <label for="prof-nome">Nome</label>
+            <input type="text" id="prof-nome" class="form-control" placeholder="Ex: Joao Pedreiro" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="prof-especialidade">Especialidade</label>
+              <input type="text" id="prof-especialidade" class="form-control" placeholder="Ex: Pedreiro, Eletricista...">
+            </div>
+            <div class="form-group">
+              <label for="prof-contato">Contato</label>
+              <input type="text" id="prof-contato" class="form-control" placeholder="Telefone/WhatsApp">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="prof-tipo">Tipo de Cobranca</label>
+              <select id="prof-tipo" class="form-control">
+                <option value="diaria">Diaria</option>
+                <option value="empreitada">Empreitada</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="prof-valor">Valor Combinado (R$)</label>
+              <input type="number" id="prof-valor" class="form-control" step="0.01" min="0" placeholder="0,00">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Novo Pagamento -->
+  <div class="modal-overlay" id="modal-pagamento">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modal-pagamento-title">Registrar Pagamento</h2>
+        <button class="modal-close" onclick="Modal.close('modal-pagamento')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-pagamento" onsubmit="event.preventDefault(); MaoDeObra.savePagamento()">
+          <input type="hidden" id="pag-profissional-id">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="pag-valor">Valor (R$)</label>
+              <input type="number" id="pag-valor" class="form-control" step="0.01" min="0" placeholder="0,00" required>
+            </div>
+            <div class="form-group">
+              <label for="pag-data">Data</label>
+              <input type="date" id="pag-data" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="pag-descricao">Descricao do Servico</label>
+            <input type="text" id="pag-descricao" class="form-control" placeholder="Ex: Assentamento piso banheiro">
+          </div>
+          <button type="submit" class="btn btn-primary">Registrar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Nova Tarefa -->
+  <div class="modal-overlay" id="modal-tarefa">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modal-tarefa-title">Nova Tarefa</h2>
+        <button class="modal-close" onclick="Modal.close('modal-tarefa')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-tarefa" onsubmit="event.preventDefault(); Cronograma.save()">
+          <div class="form-group">
+            <label for="tarefa-descricao">Descricao</label>
+            <input type="text" id="tarefa-descricao" class="form-control" placeholder="Ex: Instalar piso" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="tarefa-comodo">Comodo</label>
+              <select id="tarefa-comodo" class="form-control">
+                <option value="churrasqueira">Churrasqueira</option>
+                <option value="banheiro">Banheiro</option>
+                <option value="quarto">Quarto</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="tarefa-responsavel">Responsavel</label>
+              <input type="text" id="tarefa-responsavel" class="form-control" placeholder="Nome">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="tarefa-inicio">Data Inicio</label>
+              <input type="date" id="tarefa-inicio" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="tarefa-fim">Data Fim</label>
+              <input type="date" id="tarefa-fim" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="tarefa-status">Status</label>
+            <select id="tarefa-status" class="form-control">
+              <option value="pendente">Pendente</option>
+              <option value="em andamento">Em Andamento</option>
+              <option value="concluido">Concluido</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Orçamento -->
+  <div class="modal-overlay" id="modal-orcamento">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Definir Orcamento</h2>
+        <button class="modal-close" onclick="Modal.close('modal-orcamento')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="orcamento-grid">
+          <div class="orcamento-item">
+            <div class="comodo-dot churrasqueira"></div>
+            <label class="text-sm" style="min-width:100px">Churrasqueira</label>
+            <input type="number" id="orc-churrasqueira" class="form-control" step="0.01" min="0" placeholder="0,00">
+          </div>
+          <div class="orcamento-item">
+            <div class="comodo-dot banheiro"></div>
+            <label class="text-sm" style="min-width:100px">Banheiro</label>
+            <input type="number" id="orc-banheiro" class="form-control" step="0.01" min="0" placeholder="0,00">
+          </div>
+          <div class="orcamento-item">
+            <div class="comodo-dot quarto"></div>
+            <label class="text-sm" style="min-width:100px">Quarto</label>
+            <input type="number" id="orc-quarto" class="form-control" step="0.01" min="0" placeholder="0,00">
+          </div>
+          <div class="orcamento-item">
+            <div class="comodo-dot geral"></div>
+            <label class="text-sm" style="min-width:100px">Geral</label>
+            <input type="number" id="orc-geral" class="form-control" step="0.01" min="0" placeholder="0,00">
+          </div>
+        </div>
+        <div class="mt-16">
+          <button class="btn btn-primary" onclick="App.saveOrcamento()">Salvar Orcamento</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Backup -->
+  <div class="modal-overlay" id="modal-backup">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Backup dos Dados</h2>
+        <button class="modal-close" onclick="Modal.close('modal-backup')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="text-sm text-muted mb-16">Exporte para salvar uma copia (inclui imagens) ou importe um backup anterior.</p>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <button class="btn btn-primary" onclick="App.exportData()">Exportar Dados (JSON)</button>
+          <button class="btn btn-secondary" onclick="App.importData()">Importar Backup</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Fornecedor -->
+  <div class="modal-overlay" id="modal-fornecedor">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modal-fornecedor-title">Novo Fornecedor</h2>
+        <button class="modal-close" onclick="Modal.close('modal-fornecedor')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-fornecedor" onsubmit="event.preventDefault(); Fornecedores.save()">
+          <div class="form-group">
+            <label for="forn-nome">Nome</label>
+            <input type="text" id="forn-nome" class="form-control" placeholder="Ex: Leroy Merlin" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="forn-tipo">Tipo</label>
+              <select id="forn-tipo" class="form-control">
+                <option value="loja">Loja</option>
+                <option value="deposito">Deposito</option>
+                <option value="online">Online</option>
+                <option value="outro">Outro</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="forn-contato">Contato</label>
+              <input type="text" id="forn-contato" class="form-control" placeholder="Telefone">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="forn-endereco">Endereco</label>
+            <input type="text" id="forn-endereco" class="form-control" placeholder="Endereco da loja">
+          </div>
+          <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Cotação -->
+  <div class="modal-overlay" id="modal-cotacao">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modal-cotacao-title">Nova Cotacao</h2>
+        <button class="modal-close" onclick="Modal.close('modal-cotacao')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-cotacao" onsubmit="event.preventDefault(); Fornecedores.saveCotacao()">
+          <input type="hidden" id="cot-fornecedor-id">
+          <div class="form-group">
+            <label for="cot-material">Material</label>
+            <input type="text" id="cot-material" class="form-control" placeholder="Ex: Cimento CP-II 50kg" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cot-preco">Preco (R$)</label>
+              <input type="number" id="cot-preco" class="form-control" step="0.01" min="0" placeholder="0,00" required>
+            </div>
+            <div class="form-group">
+              <label for="cot-unidade">Unidade</label>
+              <select id="cot-unidade" class="form-control">
+                <option value="un">Unidade</option>
+                <option value="kg">Kg</option>
+                <option value="m">Metro</option>
+                <option value="m2">m2</option>
+                <option value="saco">Saco</option>
+                <option value="lata">Lata</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="cot-obs">Observacao</label>
+            <input type="text" id="cot-obs" class="form-control" placeholder="Marca, tamanho...">
+          </div>
+          <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Calculadora -->
+  <div class="modal-overlay" id="modal-calculadora">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Calculadora de Materiais</h2>
+        <button class="modal-close" onclick="Modal.close('modal-calculadora')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="text-sm text-muted mb-8">Selecione o material e informe as medidas:</p>
+        <div class="calc-grid">
+          <button class="calc-mat-btn" data-key="piso" onclick="Calculadora.selecionarMaterial('piso')">Piso</button>
+          <button class="calc-mat-btn" data-key="azulejo" onclick="Calculadora.selecionarMaterial('azulejo')">Azulejo</button>
+          <button class="calc-mat-btn" data-key="tinta" onclick="Calculadora.selecionarMaterial('tinta')">Tinta</button>
+          <button class="calc-mat-btn" data-key="argamassa_piso" onclick="Calculadora.selecionarMaterial('argamassa_piso')">Argamassa</button>
+          <button class="calc-mat-btn" data-key="rejunte" onclick="Calculadora.selecionarMaterial('rejunte')">Rejunte</button>
+          <button class="calc-mat-btn" data-key="massa_corrida" onclick="Calculadora.selecionarMaterial('massa_corrida')">Massa Corrida</button>
+          <button class="calc-mat-btn" data-key="cimento" onclick="Calculadora.selecionarMaterial('cimento')">Cimento</button>
+          <button class="calc-mat-btn" data-key="areia" onclick="Calculadora.selecionarMaterial('areia')">Areia</button>
+          <button class="calc-mat-btn" data-key="tijolo" onclick="Calculadora.selecionarMaterial('tijolo')">Tijolo</button>
+          <button class="calc-mat-btn" data-key="tubo_pvc" onclick="Calculadora.selecionarMaterial('tubo_pvc')">Tubo PVC</button>
+        </div>
+        <div id="calc-campos"></div>
+        <div id="calc-resultado" class="hidden mt-16"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fullscreen Image Viewer -->
+  <div class="fullscreen-overlay" id="fullscreen-overlay" onclick="PlantaFotos.closeFullscreen()">
+    <button class="fullscreen-close">&times;</button>
+    <img id="fullscreen-img" src="" alt="Imagem">
+  </div>
+
+  <!-- Confirm Dialog -->
+  <div class="confirm-overlay" id="confirm-overlay">
+    <div class="confirm-box">
+      <p id="confirm-msg">Tem certeza?</p>
+      <div class="confirm-actions">
+        <button class="btn btn-secondary" onclick="Confirm.respond(false)">Cancelar</button>
+        <button class="btn btn-danger" onclick="Confirm.respond(true)">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Scripts -->
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/gastos.js"></script>
+  <script src="js/materiais.js"></script>
+  <script src="js/mao-de-obra.js"></script>
+  <script src="js/cronograma.js"></script>
+  <script src="js/planta-fotos.js"></script>
+  <script src="js/recibos.js"></script>
+  <script src="js/calculadora.js"></script>
+  <script src="js/fornecedores.js"></script>
+  <script src="js/relatorio.js"></script>
+</body>
+</html>
