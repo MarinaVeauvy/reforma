@@ -841,14 +841,16 @@
             <button class="btn btn-primary" onclick="Importador.importarArquivo()">&#128196; Escolher Arquivo (PDF / CSV)</button>
             <button class="btn btn-secondary" onclick="Importador.mostrarManual()">&#9998; Digitar / Colar Manualmente</button>
           </div>
-          <p class="text-sm text-muted mt-16"><strong>Formato CSV (gastos):</strong><br>
-            descrição; valor; data; categoria; cômodo<br>
-            <em>Ex: Cimento 50kg; 35.90; 2026-02-20; material; churrasqueira</em>
-          </p>
-          <p class="text-sm text-muted mt-8"><strong>Formato CSV (materiais):</strong><br>
-            nome; quantidade; unidade; preço; cômodo; status<br>
-            <em>Ex: Porcelanato 60x60; 25; m2; 89.90; banheiro; pendente</em>
-          </p>
+          <div class="card mt-16" style="background:var(--gray-50);border:1px dashed var(--border)">
+            <div class="card-title mb-8">&#128203; Baixe os modelos prontos</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+              <a href="modelos/gastos.csv" download class="btn btn-secondary" style="text-decoration:none;font-size:0.8rem;padding:10px">&#128176; Gastos</a>
+              <a href="modelos/materiais.csv" download class="btn btn-secondary" style="text-decoration:none;font-size:0.8rem;padding:10px">&#128230; Materiais</a>
+              <a href="modelos/tarefas.csv" download class="btn btn-secondary" style="text-decoration:none;font-size:0.8rem;padding:10px">&#128197; Tarefas</a>
+              <a href="modelos/profissionais.csv" download class="btn btn-secondary" style="text-decoration:none;font-size:0.8rem;padding:10px">&#128119; Profissionais</a>
+            </div>
+            <p class="text-sm text-muted mt-8">Abra no Excel ou Google Sheets, preencha com seus dados, salve como CSV e importe acima.</p>
+          </div>
         </div>
 
         <!-- Area manual -->
