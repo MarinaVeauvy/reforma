@@ -7,6 +7,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="img/icons/logo.svg">
+  <link rel="apple-touch-icon" href="img/icons/logo.svg">
   <title>Reforma - Gestão</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -14,7 +16,10 @@
 
   <!-- HEADER -->
   <header class="header">
-    <h1 id="header-title">Painel</h1>
+    <div class="header-brand">
+      <img src="img/icons/logo.svg" alt="Logo" class="header-logo">
+      <h1 id="header-title">Painel</h1>
+    </div>
     <div class="header-actions">
       <button class="header-btn" onclick="BuscaGlobal.toggle()" title="Buscar">&#128269;</button>
       <button class="header-btn" id="btn-theme" title="Tema escuro/claro">&#9790;</button>
