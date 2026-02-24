@@ -265,6 +265,88 @@ const WhatsApp = {
     const url = `https://wa.me/?text=${encodeURIComponent(texto)}`;
     window.open(url, '_blank');
   },
+
+  compartilharRelatorio() {
+    const orc = Storage.getOrcamento();
+    const totalOrc = orc.churrasqueira + orc.banheiro + orc.quarto + orc.geral;
+    const totalGasto = Storage.getTotalGastos();
+    const tarefas = Storage.getAll('tarefas');
+    const concluidas = tarefas.filter(t => t.status === 'concluido').length;
+    const emAndamento = tarefas.filter(t => t.status === 'em-andamento').length;
+    const atrasadas = tarefas.filter(t => t.status === 'atrasado').length;
+    const pct = tarefas.length > 0 ? Math.round((concluidas / tarefas.length) * 100) : 0;
+
+    let texto = `🏗️ *RELATÓRIO DA REFORMA*\n`;
+    texto += `📅 ${new Date().toLocaleDateString('pt-BR')}\n\n`;
+
+    // Resumo financeiro
+    texto += `💰 *RESUMO FINANCEIRO*\n`;
+    texto += `Orçamento: ${Fmt.moeda(totalOrc)}\n`;
+    texto += `Total Gasto: ${Fmt.moeda(totalGasto)}\n`;
+    texto += `Saldo: ${Fmt.moeda(totalOrc - totalGasto)}\n`;
+    texto += `Progresso: ${pct}% (${concluidas}/${tarefas.length} tarefas)\n\n`;
+
+    // Gastos por cômodo
+    const comodos = ['churrasqueira', 'banheiro', 'quarto', 'geral'];
+    const icones = { churrasqueira: '🔥', banheiro: '🚿', quarto: '🛏️', geral: '📦' };
+    const nomes = { churrasqueira: 'Churrasqueira', banheiro: 'Banheiro', quarto: 'Quarto', geral: 'Geral' };
+
+    texto += `📊 *GASTOS POR CÔMODO*\n`;
+    comodos.forEach(c => {
+      const gasto = Storage.getTotalGastos({ comodo: c });
+      const budget = orc[c] || 0;
+      if (gasto > 0 || budget > 0) {
+        texto += `${icones[c]} *${nomes[c]}*: ${Fmt.moeda(gasto)} / ${Fmt.moeda(budget)}\n`;
+      }
+    });
+    texto += '\n';
+
+    // Materiais
+    const materiais = Storage.getAll('materiais');
+    const pendentes = materiais.filter(m => m.status === 'pendente').length;
+    const comprados = materiais.filter(m => m.status === 'comprado').length;
+    const entregues = materiais.filter(m => m.status === 'entregue').length;
+    const aplicados = materiais.filter(m => m.status === 'aplicado').length;
+
+    texto += `📦 *MATERIAIS*\n`;
+    texto += `Pendentes: ${pendentes} | Comprados: ${comprados} | Entregues: ${entregues} | Aplicados: ${aplicados}\n\n`;
+
+    // Mão de obra
+    const profissionais = Storage.getAll('profissionais');
+    if (profissionais.length > 0) {
+      texto += `👷 *MÃO DE OBRA*\n`;
+      profissionais.forEach(p => {
+        const totalPago = Storage.getTotalPagamentos({ profissionalId: p.id });
+        texto += `• ${p.nome} (${p.especialidade || '-'}): Pago ${Fmt.moeda(totalPago)} de ${Fmt.moeda(p.valor)}\n`;
+      });
+      texto += '\n';
+    }
+
+    // Cronograma
+    texto += `📋 *CRONOGRAMA*\n`;
+    texto += `Concluídas: ${concluidas} | Em andamento: ${emAndamento} | Atrasadas: ${atrasadas}\n`;
+    if (atrasadas > 0) {
+      const listaAtrasadas = tarefas.filter(t => t.status === 'atrasado');
+      listaAtrasadas.forEach(t => {
+        texto += `⚠️ ${t.descricao} (${nomes[t.comodo] || t.comodo})\n`;
+      });
+    }
+
+    texto += `\n🔗 ${window.location.href}`;
+
+    const url = `https://wa.me/?text=${encodeURIComponent(texto)}`;
+    window.open(url, '_blank');
+  },
+
+  abrirOpcoes() {
+    const modal = document.getElementById('modal-whatsapp');
+    if (modal) modal.classList.add('active');
+  },
+
+  fecharOpcoes() {
+    const modal = document.getElementById('modal-whatsapp');
+    if (modal) modal.classList.remove('active');
+  },
 };
 
 // ===== CATEGORIAS CUSTOMIZÁVEIS =====

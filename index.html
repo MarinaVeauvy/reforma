@@ -250,10 +250,10 @@
           <span class="mais-label">Apresentação</span>
           <span class="mais-desc">Visão resumida para reunião</span>
         </div>
-        <div class="mais-item" onclick="WhatsApp.compartilharResumo()">
+        <div class="mais-item" onclick="WhatsApp.abrirOpcoes()">
           <span class="mais-icon">&#128172;</span>
           <span class="mais-label">WhatsApp</span>
-          <span class="mais-desc">Compartilhar resumo</span>
+          <span class="mais-desc">Compartilhar por WhatsApp</span>
         </div>
         <div class="mais-item" onclick="QRCode.gerar()">
           <span class="mais-icon">&#9638;</span>
@@ -911,6 +911,41 @@
         <img id="qr-img" src="" alt="QR Code">
         <p class="text-sm text-muted" id="qr-url"></p>
         <button class="btn btn-primary mt-8" onclick="QRCode.copiarLink()">Copiar Link</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: WhatsApp Opções -->
+  <div class="modal-overlay" id="modal-whatsapp">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Compartilhar por WhatsApp</h2>
+        <button class="modal-close" onclick="WhatsApp.fecharOpcoes()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="share-options">
+          <div class="share-option" onclick="WhatsApp.fecharOpcoes(); WhatsApp.compartilharResumo();">
+            <span class="share-icon">💬</span>
+            <div class="share-info">
+              <div class="share-title">Resumo Rápido</div>
+              <div class="share-desc">Totais e progresso em texto curto</div>
+            </div>
+          </div>
+          <div class="share-option" onclick="WhatsApp.fecharOpcoes(); WhatsApp.compartilharRelatorio();">
+            <span class="share-icon">📊</span>
+            <div class="share-info">
+              <div class="share-title">Relatório Detalhado</div>
+              <div class="share-desc">Gastos por cômodo, materiais, mão de obra e cronograma</div>
+            </div>
+          </div>
+          <div class="share-option" onclick="Relatorio.compartilharPDF();">
+            <span class="share-icon">📄</span>
+            <div class="share-info">
+              <div class="share-title">Enviar PDF</div>
+              <div class="share-desc">Relatório completo em PDF</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
