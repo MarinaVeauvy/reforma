@@ -54,8 +54,9 @@ const Materiais = {
     if (materiais.length === 0) {
       container.innerHTML = `
         <div class="empty-state">
-          <div class="empty-icon">&#128230;</div>
+          <div class="empty-icon">📦</div>
           <p>Nenhum material cadastrado</p>
+          <button class="btn btn-primary mt-16" onclick="Materiais.openModal()" style="width:auto">+ Adicionar Material</button>
         </div>
       `;
       return;

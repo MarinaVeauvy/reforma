@@ -12,6 +12,56 @@ const Dashboard = {
     this.renderTimelineChart();
     this.renderProximasTarefas();
     this.renderOrcamentoProgress();
+    this.renderPrimeirosPassos();
+  },
+
+  renderPrimeirosPassos() {
+    const container = document.getElementById('dash-primeiros-passos');
+    if (!container) return;
+
+    const gastos = Storage.getAll('gastos');
+    const materiais = Storage.getAll('materiais');
+    const profissionais = Storage.getAll('profissionais');
+    const tarefas = Storage.getAll('tarefas');
+    const orc = Storage.getOrcamento();
+    const totalOrc = orc.churrasqueira + orc.banheiro + orc.quarto + orc.geral;
+
+    // Se já tem dados suficientes, esconde o guia
+    if (gastos.length > 0 && materiais.length > 0 && tarefas.length > 0 && totalOrc > 0) {
+      container.classList.add('hidden');
+      return;
+    }
+
+    container.classList.remove('hidden');
+
+    const steps = [
+      { done: totalOrc > 0, label: 'Definir orçamento por cômodo', action: 'App.openOrcamentoModal()', icon: '💵' },
+      { done: gastos.length > 0, label: 'Registrar primeiro gasto', action: "App.navigate('gastos'); setTimeout(() => Gastos.openModal(), 300)", icon: '💰' },
+      { done: materiais.length > 0, label: 'Cadastrar materiais', action: "App.navigate('materiais'); setTimeout(() => Materiais.openModal(), 300)", icon: '📦' },
+      { done: profissionais.length > 0, label: 'Adicionar profissionais', action: "App.navigate('mao-de-obra'); setTimeout(() => MaoDeObra.openModal(), 300)", icon: '👷' },
+      { done: tarefas.length > 0, label: 'Criar tarefas no cronograma', action: "App.navigate('cronograma'); setTimeout(() => Cronograma.openModal(), 300)", icon: '📅' },
+    ];
+
+    const completados = steps.filter(s => s.done).length;
+
+    container.innerHTML = `
+      <div class="card-header">
+        <span class="card-title">🚀 Primeiros Passos</span>
+        <span class="text-sm text-muted">${completados}/${steps.length}</span>
+      </div>
+      <div class="progress-bar mb-16">
+        <div class="progress-fill ok" style="width:${(completados / steps.length) * 100}%"></div>
+      </div>
+      ${steps.map(s => `
+        <div class="item-row" style="cursor:${s.done ? 'default' : 'pointer'};opacity:${s.done ? '0.5' : '1'}" onclick="${s.done ? '' : s.action}">
+          <span style="font-size:1.3rem;flex-shrink:0">${s.done ? '✅' : s.icon}</span>
+          <div class="item-info">
+            <div class="item-title" style="${s.done ? 'text-decoration:line-through' : ''}">${s.label}</div>
+          </div>
+          ${s.done ? '' : '<span class="text-sm" style="color:var(--primary);font-weight:600">Fazer →</span>'}
+        </div>
+      `).join('')}
+    `;
   },
 
   // Alertas de atraso e orçamento estourado

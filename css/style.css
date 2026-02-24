@@ -626,18 +626,24 @@ select.form-control {
 /* ===== EMPTY STATE ===== */
 .empty-state {
   text-align: center;
-  padding: 40px 20px;
+  padding: 48px 24px;
   color: var(--text-secondary);
 }
 
 .empty-state .empty-icon {
-  font-size: 3rem;
-  margin-bottom: 12px;
-  opacity: 0.5;
+  font-size: 3.5rem;
+  margin-bottom: 16px;
+  opacity: 0.7;
 }
 
 .empty-state p {
-  font-size: 0.9rem;
+  font-size: var(--text-base);
+  font-weight: 500;
+}
+
+.empty-state .btn {
+  margin-top: var(--space-4);
+  box-shadow: var(--shadow);
 }
 
 /* ===== SEÇÃO DE ORÇAMENTO ===== */

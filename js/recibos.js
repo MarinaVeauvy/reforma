@@ -16,8 +16,9 @@ const Recibos = {
     if (recibos.length === 0) {
       container.innerHTML = `
         <div class="empty-state">
-          <div class="empty-icon">&#128433;</div>
+          <div class="empty-icon">🧾</div>
           <p>Nenhum recibo escaneado</p>
+          <button class="btn btn-primary mt-16" onclick="Recibos.scan()" style="width:auto">📷 Escanear Recibo</button>
         </div>
       `;
       return;

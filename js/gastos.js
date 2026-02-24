@@ -54,8 +54,9 @@ const Gastos = {
     if (gastos.length === 0) {
       container.innerHTML = `
         <div class="empty-state">
-          <div class="empty-icon">$</div>
+          <div class="empty-icon">💰</div>
           <p>Nenhum gasto registrado</p>
+          <button class="btn btn-primary mt-16" onclick="Gastos.openModal()" style="width:auto">+ Adicionar Gasto</button>
         </div>
       `;
       return;

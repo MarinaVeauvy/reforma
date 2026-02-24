@@ -15,8 +15,9 @@ const Fornecedores = {
     if (fornecedores.length === 0) {
       container.innerHTML = `
         <div class="empty-state">
-          <div class="empty-icon">&#127978;</div>
+          <div class="empty-icon">🏪</div>
           <p>Nenhum fornecedor cadastrado</p>
+          <button class="btn btn-primary mt-16" onclick="Fornecedores.openModal()" style="width:auto">+ Adicionar Fornecedor</button>
         </div>
       `;
       return;

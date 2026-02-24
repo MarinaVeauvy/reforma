@@ -77,8 +77,9 @@ const Cronograma = {
     if (tarefas.length === 0) {
       container.innerHTML = `
         <div class="empty-state">
-          <div class="empty-icon">&#128197;</div>
+          <div class="empty-icon">📅</div>
           <p>Nenhuma tarefa cadastrada</p>
+          <button class="btn btn-primary mt-16" onclick="Cronograma.openModal()" style="width:auto">+ Adicionar Tarefa</button>
         </div>
       `;
       return;

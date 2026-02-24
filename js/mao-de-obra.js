@@ -39,8 +39,9 @@ const MaoDeObra = {
     if (profissionais.length === 0) {
       container.innerHTML = `
         <div class="empty-state">
-          <div class="empty-icon">&#128119;</div>
+          <div class="empty-icon">👷</div>
           <p>Nenhum profissional cadastrado</p>
+          <button class="btn btn-primary mt-16" onclick="MaoDeObra.openModal()" style="width:auto">+ Adicionar Profissional</button>
         </div>
       `;
       return;
@@ -86,8 +87,9 @@ const MaoDeObra = {
     if (pagamentos.length === 0) {
       container.innerHTML = `
         <div class="empty-state">
-          <div class="empty-icon">&#128176;</div>
+          <div class="empty-icon">💰</div>
           <p>Nenhum pagamento registrado</p>
+          <p class="text-sm text-muted mt-8">Cadastre profissionais primeiro na aba "Profissionais"</p>
         </div>
       `;
       return;

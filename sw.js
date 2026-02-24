@@ -1,5 +1,5 @@
 // Service Worker — Cache offline para PWA
-const CACHE_NAME = 'reforma-v5';
+const CACHE_NAME = 'reforma-v6';
 const ASSETS = [
   './',
   './index.html',
