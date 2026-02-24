@@ -63,7 +63,7 @@ const Dashboard = {
     const categorias = ['material', 'mao-de-obra', 'frete', 'ferramentas', 'outros'];
     const nomes = {
       'material': 'Material',
-      'mao-de-obra': 'Mao de Obra',
+      'mao-de-obra': 'Mão de Obra',
       'frete': 'Frete',
       'ferramentas': 'Ferramentas',
       'outros': 'Outros',
@@ -104,9 +104,9 @@ const Dashboard = {
     if (totalOrcamento === 0) {
       container.innerHTML = `
         <div class="text-center">
-          <p class="text-muted text-sm mb-8">Nenhum orcamento definido</p>
+          <p class="text-muted text-sm mb-8">Nenhum orçamento definido</p>
           <button class="btn btn-secondary" onclick="App.openOrcamentoModal()" style="width:auto">
-            Definir Orcamento
+            Definir Orçamento
           </button>
         </div>
       `;

@@ -56,7 +56,7 @@ const MaoDeObra = {
             <div class="item-subtitle">
               ${p.especialidade || ''}
               ${p.contato ? ' - ' + p.contato : ''}
-              - ${p.tipoCobranca === 'diaria' ? 'Diaria' : 'Empreitada'}: ${Fmt.moeda(p.valor)}
+              - ${p.tipoCobranca === 'diaria' ? 'Diária' : 'Empreitada'}: ${Fmt.moeda(p.valor)}
             </div>
           </div>
           <div style="text-align:right">
@@ -206,7 +206,7 @@ const MaoDeObra = {
       const pagamentos = Storage.getAll('pagamentos').filter(p => p.profissionalId !== id);
       Storage.save('pagamentos', pagamentos);
       Storage.remove('profissionais', id);
-      Toast.show('Profissional excluido');
+      Toast.show('Profissional excluído');
       this.render();
     }
   },
@@ -215,7 +215,7 @@ const MaoDeObra = {
     const ok = await Confirm.show('Excluir este pagamento?');
     if (ok) {
       Storage.remove('pagamentos', id);
-      Toast.show('Pagamento excluido');
+      Toast.show('Pagamento excluído');
       this.render();
     }
   },

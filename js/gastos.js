@@ -109,7 +109,7 @@ const Gastos = {
     const formaPagamento = document.getElementById('gasto-pagamento').value;
 
     if (!descricao || !valor) {
-      Toast.show('Preencha descricao e valor');
+      Toast.show('Preencha descrição e valor');
       return;
     }
 
@@ -154,7 +154,7 @@ const Gastos = {
     const ok = await Confirm.show('Excluir este gasto?');
     if (ok) {
       Storage.remove('gastos', id);
-      Toast.show('Gasto excluido');
+      Toast.show('Gasto excluído');
       this.render();
     }
   },

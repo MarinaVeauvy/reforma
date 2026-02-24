@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="manifest" href="manifest.json">
-  <title>Reforma - Gestao</title>
+  <title>Reforma - Gestão</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -29,7 +29,7 @@
         <div class="value" id="dash-total-gasto">R$ 0,00</div>
       </div>
       <div class="summary-card">
-        <div class="label">Orcamento Restante</div>
+        <div class="label">Orçamento Restante</div>
         <div class="value success" id="dash-orcamento-restante">R$ 0,00</div>
       </div>
       <div class="summary-card">
@@ -44,14 +44,14 @@
 
     <div class="card">
       <div class="card-header">
-        <span class="card-title">Orcamento por Comodo</span>
-        <button class="btn-icon" onclick="App.openOrcamentoModal()" title="Editar orcamento">&#9998;</button>
+        <span class="card-title">Orçamento por Cômodo</span>
+        <button class="btn-icon" onclick="App.openOrcamentoModal()" title="Editar orçamento">&#9998;</button>
       </div>
       <div id="dash-orcamento-progress"></div>
     </div>
 
     <div class="card">
-      <div class="card-header"><span class="card-title">Gasto por Comodo</span></div>
+      <div class="card-header"><span class="card-title">Gasto por Cômodo</span></div>
       <div class="bar-chart" id="dash-chart-comodo"></div>
     </div>
 
@@ -61,7 +61,7 @@
     </div>
 
     <div class="card">
-      <div class="card-header"><span class="card-title">Proximas Tarefas</span></div>
+      <div class="card-header"><span class="card-title">Próximas Tarefas</span></div>
       <div id="dash-proximas-tarefas"></div>
     </div>
 
@@ -97,7 +97,7 @@
       <div class="filter-bar" id="gastos-filtro-categoria">
         <button class="filter-chip active" data-value="todos">Todos</button>
         <button class="filter-chip" data-value="material">Material</button>
-        <button class="filter-chip" data-value="mao-de-obra">Mao de Obra</button>
+        <button class="filter-chip" data-value="mao-de-obra">Mão de Obra</button>
         <button class="filter-chip" data-value="frete">Frete</button>
         <button class="filter-chip" data-value="ferramentas">Ferramentas</button>
         <button class="filter-chip" data-value="outros">Outros</button>
@@ -165,7 +165,7 @@
       <div class="flex-between mb-8">
         <div>
           <div class="text-lg fw-bold" id="crono-progresso">0%</div>
-          <div class="text-sm text-muted" id="crono-count">0/0 concluida(s)</div>
+          <div class="text-sm text-muted" id="crono-count">0/0 concluída(s)</div>
         </div>
       </div>
 
@@ -182,7 +182,7 @@
         <button class="filter-chip active" data-value="todos">Todos</button>
         <button class="filter-chip" data-value="pendente">Pendente</button>
         <button class="filter-chip" data-value="em andamento">Em Andamento</button>
-        <button class="filter-chip" data-value="concluido">Concluido</button>
+        <button class="filter-chip" data-value="concluido">Concluído</button>
         <button class="filter-chip" data-value="atrasado">Atrasado</button>
       </div>
 
@@ -208,12 +208,12 @@
         <div class="mais-item" onclick="App.navigateSub('fornecedores')">
           <span class="mais-icon">&#127978;</span>
           <span class="mais-label">Fornecedores</span>
-          <span class="mais-desc">Cadastro e cotacoes</span>
+          <span class="mais-desc">Cadastro e cotações</span>
         </div>
         <div class="mais-item" onclick="App.navigateSub('comparativo')">
           <span class="mais-icon">&#128200;</span>
           <span class="mais-label">Comparativo</span>
-          <span class="mais-desc">Comparar precos por material</span>
+          <span class="mais-desc">Comparar preços por material</span>
         </div>
         <div class="mais-item" onclick="App.navigateSub('lista-compras')">
           <span class="mais-icon">&#128722;</span>
@@ -223,7 +223,7 @@
         <div class="mais-item" onclick="Calculadora.openModal()">
           <span class="mais-icon">&#128208;</span>
           <span class="mais-label">Calculadora</span>
-          <span class="mais-desc">Calcular materiais por area</span>
+          <span class="mais-desc">Calcular materiais por área</span>
         </div>
         <div class="mais-item" onclick="Importador.openModal()">
           <span class="mais-icon">&#128228;</span>
@@ -232,8 +232,8 @@
         </div>
         <div class="mais-item" onclick="Relatorio.gerar()">
           <span class="mais-icon">&#128196;</span>
-          <span class="mais-label">Relatorio PDF</span>
-          <span class="mais-desc">Exportar relatorio completo</span>
+          <span class="mais-label">Relatório PDF</span>
+          <span class="mais-desc">Exportar relatório completo</span>
         </div>
         <div class="mais-item" onclick="App.openBackupModal()">
           <span class="mais-icon">&#128190;</span>
@@ -304,7 +304,7 @@
     <div class="sub-page" id="sub-comparativo">
       <div class="sub-header">
         <button class="sub-back" onclick="App.backToMais()">&#8592;</button>
-        <h2 style="font-size:1rem">Comparativo de Precos</h2>
+        <h2 style="font-size:1rem">Comparativo de Preços</h2>
       </div>
 
       <div id="comparativo-lista"></div>
@@ -367,7 +367,7 @@
       <div class="modal-body">
         <form id="form-gasto" onsubmit="event.preventDefault(); Gastos.save()">
           <div class="form-group">
-            <label for="gasto-descricao">Descricao</label>
+            <label for="gasto-descricao">Descrição</label>
             <input type="text" id="gasto-descricao" class="form-control" placeholder="Ex: Cimento, Azulejo..." required>
           </div>
           <div class="form-row">
@@ -385,14 +385,14 @@
               <label for="gasto-categoria">Categoria</label>
               <select id="gasto-categoria" class="form-control">
                 <option value="material">Material</option>
-                <option value="mao-de-obra">Mao de Obra</option>
+                <option value="mao-de-obra">Mão de Obra</option>
                 <option value="frete">Frete</option>
                 <option value="ferramentas">Ferramentas</option>
                 <option value="outros">Outros</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="gasto-comodo">Comodo</label>
+              <label for="gasto-comodo">Cômodo</label>
               <select id="gasto-comodo" class="form-control">
                 <option value="churrasqueira">Churrasqueira</option>
                 <option value="banheiro">Banheiro</option>
@@ -406,9 +406,9 @@
             <select id="gasto-pagamento" class="form-control">
               <option value="dinheiro">Dinheiro</option>
               <option value="pix">PIX</option>
-              <option value="cartao-debito">Cartao Debito</option>
-              <option value="cartao-credito">Cartao Credito</option>
-              <option value="transferencia">Transferencia</option>
+              <option value="cartao-debito">Cartão Débito</option>
+              <option value="cartao-credito">Cartão Crédito</option>
+              <option value="transferencia">Transferência</option>
             </select>
           </div>
           <button type="submit" class="btn btn-primary">Salvar</button>
@@ -453,11 +453,11 @@
           </div>
           <div class="form-row">
             <div class="form-group">
-              <label for="mat-preco">Preco Unitario (R$)</label>
+              <label for="mat-preco">Preço Unitário (R$)</label>
               <input type="number" id="mat-preco" class="form-control" step="0.01" min="0" placeholder="0,00">
             </div>
             <div class="form-group">
-              <label for="mat-comodo">Comodo</label>
+              <label for="mat-comodo">Cômodo</label>
               <select id="mat-comodo" class="form-control">
                 <option value="churrasqueira">Churrasqueira</option>
                 <option value="banheiro">Banheiro</option>
@@ -491,7 +491,7 @@
         <form id="form-profissional" onsubmit="event.preventDefault(); MaoDeObra.save()">
           <div class="form-group">
             <label for="prof-nome">Nome</label>
-            <input type="text" id="prof-nome" class="form-control" placeholder="Ex: Joao Pedreiro" required>
+            <input type="text" id="prof-nome" class="form-control" placeholder="Ex: João Pedreiro" required>
           </div>
           <div class="form-row">
             <div class="form-group">
@@ -505,9 +505,9 @@
           </div>
           <div class="form-row">
             <div class="form-group">
-              <label for="prof-tipo">Tipo de Cobranca</label>
+              <label for="prof-tipo">Tipo de Cobrança</label>
               <select id="prof-tipo" class="form-control">
-                <option value="diaria">Diaria</option>
+                <option value="diaria">Diária</option>
                 <option value="empreitada">Empreitada</option>
               </select>
             </div>
@@ -543,7 +543,7 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="pag-descricao">Descricao do Servico</label>
+            <label for="pag-descricao">Descrição do Serviço</label>
             <input type="text" id="pag-descricao" class="form-control" placeholder="Ex: Assentamento piso banheiro">
           </div>
           <button type="submit" class="btn btn-primary">Registrar</button>
@@ -562,12 +562,12 @@
       <div class="modal-body">
         <form id="form-tarefa" onsubmit="event.preventDefault(); Cronograma.save()">
           <div class="form-group">
-            <label for="tarefa-descricao">Descricao</label>
+            <label for="tarefa-descricao">Descrição</label>
             <input type="text" id="tarefa-descricao" class="form-control" placeholder="Ex: Instalar piso" required>
           </div>
           <div class="form-row">
             <div class="form-group">
-              <label for="tarefa-comodo">Comodo</label>
+              <label for="tarefa-comodo">Cômodo</label>
               <select id="tarefa-comodo" class="form-control">
                 <option value="churrasqueira">Churrasqueira</option>
                 <option value="banheiro">Banheiro</option>
@@ -575,13 +575,13 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="tarefa-responsavel">Responsavel</label>
+              <label for="tarefa-responsavel">Responsável</label>
               <input type="text" id="tarefa-responsavel" class="form-control" placeholder="Nome">
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
-              <label for="tarefa-inicio">Data Inicio</label>
+              <label for="tarefa-inicio">Data Início</label>
               <input type="date" id="tarefa-inicio" class="form-control">
             </div>
             <div class="form-group">
@@ -594,7 +594,7 @@
             <select id="tarefa-status" class="form-control">
               <option value="pendente">Pendente</option>
               <option value="em andamento">Em Andamento</option>
-              <option value="concluido">Concluido</option>
+              <option value="concluido">Concluído</option>
             </select>
           </div>
           <button type="submit" class="btn btn-primary">Salvar</button>
@@ -607,7 +607,7 @@
   <div class="modal-overlay" id="modal-orcamento">
     <div class="modal">
       <div class="modal-header">
-        <h2>Definir Orcamento</h2>
+        <h2>Definir Orçamento</h2>
         <button class="modal-close" onclick="Modal.close('modal-orcamento')">&times;</button>
       </div>
       <div class="modal-body">
@@ -634,7 +634,7 @@
           </div>
         </div>
         <div class="mt-16">
-          <button class="btn btn-primary" onclick="App.saveOrcamento()">Salvar Orcamento</button>
+          <button class="btn btn-primary" onclick="App.saveOrcamento()">Salvar Orçamento</button>
         </div>
       </div>
     </div>
@@ -648,7 +648,7 @@
         <button class="modal-close" onclick="Modal.close('modal-backup')">&times;</button>
       </div>
       <div class="modal-body">
-        <p class="text-sm text-muted mb-16">Exporte para salvar uma copia (inclui imagens) ou importe um backup anterior.</p>
+        <p class="text-sm text-muted mb-16">Exporte para salvar uma cópia (inclui imagens) ou importe um backup anterior.</p>
         <div style="display:flex;flex-direction:column;gap:12px">
           <button class="btn btn-primary" onclick="App.exportData()">Exportar Dados (JSON)</button>
           <button class="btn btn-secondary" onclick="App.importData()">Importar Backup</button>
@@ -675,7 +675,7 @@
               <label for="forn-tipo">Tipo</label>
               <select id="forn-tipo" class="form-control">
                 <option value="loja">Loja</option>
-                <option value="deposito">Deposito</option>
+                <option value="deposito">Depósito</option>
                 <option value="online">Online</option>
                 <option value="outro">Outro</option>
               </select>
@@ -686,8 +686,8 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="forn-endereco">Endereco</label>
-            <input type="text" id="forn-endereco" class="form-control" placeholder="Endereco da loja">
+            <label for="forn-endereco">Endereço</label>
+            <input type="text" id="forn-endereco" class="form-control" placeholder="Endereço da loja">
           </div>
           <button type="submit" class="btn btn-primary">Salvar</button>
         </form>
@@ -699,7 +699,7 @@
   <div class="modal-overlay" id="modal-cotacao">
     <div class="modal">
       <div class="modal-header">
-        <h2 id="modal-cotacao-title">Nova Cotacao</h2>
+        <h2 id="modal-cotacao-title">Nova Cotação</h2>
         <button class="modal-close" onclick="Modal.close('modal-cotacao')">&times;</button>
       </div>
       <div class="modal-body">
@@ -711,7 +711,7 @@
           </div>
           <div class="form-row">
             <div class="form-group">
-              <label for="cot-preco">Preco (R$)</label>
+              <label for="cot-preco">Preço (R$)</label>
               <input type="number" id="cot-preco" class="form-control" step="0.01" min="0" placeholder="0,00" required>
             </div>
             <div class="form-group">
@@ -727,7 +727,7 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="cot-obs">Observacao</label>
+            <label for="cot-obs">Observação</label>
             <input type="text" id="cot-obs" class="form-control" placeholder="Marca, tamanho...">
           </div>
           <button type="submit" class="btn btn-primary">Salvar</button>
@@ -783,17 +783,17 @@
 
         <!-- Area de arquivo -->
         <div id="import-file-area">
-          <p class="text-sm text-muted mb-8">Envie um PDF (orcamento, nota fiscal) ou CSV/TXT com os dados.</p>
+          <p class="text-sm text-muted mb-8">Envie um PDF (orçamento, nota fiscal) ou CSV/TXT com os dados.</p>
           <div style="display:flex;flex-direction:column;gap:10px">
             <button class="btn btn-primary" onclick="Importador.importarArquivo()">&#128196; Escolher Arquivo (PDF / CSV)</button>
             <button class="btn btn-secondary" onclick="Importador.mostrarManual()">&#9998; Digitar / Colar Manualmente</button>
           </div>
           <p class="text-sm text-muted mt-16"><strong>Formato CSV (gastos):</strong><br>
-            descricao; valor; data; categoria; comodo<br>
+            descrição; valor; data; categoria; cômodo<br>
             <em>Ex: Cimento 50kg; 35.90; 2026-02-20; material; churrasqueira</em>
           </p>
           <p class="text-sm text-muted mt-8"><strong>Formato CSV (materiais):</strong><br>
-            nome; quantidade; unidade; preco; comodo; status<br>
+            nome; quantidade; unidade; preço; cômodo; status<br>
             <em>Ex: Porcelanato 60x60; 25; m2; 89.90; banheiro; pendente</em>
           </p>
         </div>
@@ -812,10 +812,10 @@
         <div id="import-preview" class="hidden">
           <div class="flex-between mb-8">
             <span class="fw-bold text-sm" id="import-total-count">0 item(s)</span>
-            <button class="btn btn-secondary" onclick="Importador.openModal()" style="width:auto;padding:6px 12px;font-size:0.8rem">Recomecar</button>
+            <button class="btn btn-secondary" onclick="Importador.openModal()" style="width:auto;padding:6px 12px;font-size:0.8rem">Recomeçar</button>
           </div>
           <div id="import-preview-lista" style="max-height:300px;overflow-y:auto"></div>
-          <button class="btn btn-primary mt-16" onclick="Importador.confirmarImportacao()">Confirmar Importacao</button>
+          <button class="btn btn-primary mt-16" onclick="Importador.confirmarImportacao()">Confirmar Importação</button>
         </div>
       </div>
     </div>

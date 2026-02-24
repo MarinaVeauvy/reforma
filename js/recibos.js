@@ -177,7 +177,7 @@ const Recibos = {
     document.getElementById('form-gasto').dataset.reciboId = recibo.id;
 
     document.getElementById('modal-gasto-title').textContent = 'Gasto do Recibo';
-    Toast.show('Dados extraidos! Confira e salve.');
+    Toast.show('Dados extraídos! Confira e salve.');
     Modal.open('modal-gasto');
   },
 
@@ -190,7 +190,7 @@ const Recibos = {
     const ok = await Confirm.show('Excluir este recibo?');
     if (ok) {
       await ImageDB.remove(id);
-      Toast.show('Recibo excluido');
+      Toast.show('Recibo excluído');
       this.render();
     }
   },

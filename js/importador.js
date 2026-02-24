@@ -32,7 +32,7 @@ const Importador = {
         }
 
         if (!texto.trim()) {
-          Toast.show('Nao foi possivel extrair texto do arquivo');
+          Toast.show('Não foi possível extrair texto do arquivo');
           return;
         }
 
@@ -65,7 +65,7 @@ const Importador = {
       gastos: 'Cimento 50kg; 35.90; 2026-02-20; material; churrasqueira\nArgamassa AC-III; 28.50; 2026-02-20; material; banheiro\nEletricista; 350; 2026-02-18; mao-de-obra; quarto',
       materiais: 'Cimento CP-II 50kg; 10; saco; 35.90; churrasqueira; pendente\nPorcelanato 60x60; 25; m2; 89.90; banheiro; pendente\nTinta Coral 3.6L; 3; lata; 189; quarto; pendente',
       tarefas: 'Demolir piso antigo; churrasqueira; 2026-03-01; 2026-03-03; Pedreiro; pendente\nInstalar eletrica; quarto; 2026-03-05; 2026-03-07; Eletricista; pendente',
-      profissionais: 'Joao Silva; Pedreiro; 11999887766; diaria; 250\nCarlos Souza; Eletricista; 11998776655; empreitada; 2500',
+      profissionais: 'João Silva; Pedreiro; 11999887766; diaria; 250\nCarlos Souza; Eletricista; 11998776655; empreitada; 2500',
     };
 
     document.getElementById('import-manual-text').value = '';

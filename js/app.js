@@ -58,7 +58,7 @@ const App = {
       dashboard: 'Painel',
       gastos: 'Gastos',
       materiais: 'Materiais',
-      'mao-de-obra': 'Mao de Obra',
+      'mao-de-obra': 'Mão de Obra',
       cronograma: 'Cronograma',
       mais: 'Mais',
     };
@@ -87,7 +87,7 @@ const App = {
       'comparativo': 'Comparativo',
       'lista-compras': 'Lista de Compras',
       'calculadora': 'Calculadora',
-      'relatorio': 'Relatorio',
+      'relatorio': 'Relatório',
     };
     document.getElementById('header-title').textContent = titles[subPage] || 'Mais';
 
@@ -209,7 +209,7 @@ const App = {
           this.navigate(this.currentPage);
           Dashboard.refresh();
         } catch (err) {
-          Toast.show('Erro: arquivo invalido');
+          Toast.show('Erro: arquivo inválido');
         }
       };
       reader.readAsText(file);
@@ -235,7 +235,7 @@ const App = {
       geral: parseFloat(document.getElementById('orc-geral').value) || 0,
     };
     Storage.saveOrcamento(orc);
-    Toast.show('Orcamento salvo!');
+    Toast.show('Orçamento salvo!');
     Modal.closeAll();
     Dashboard.refresh();
   },

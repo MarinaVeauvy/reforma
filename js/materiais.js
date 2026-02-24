@@ -158,7 +158,7 @@ const Materiais = {
     const ok = await Confirm.show('Excluir este material?');
     if (ok) {
       Storage.remove('materiais', id);
-      Toast.show('Material excluido');
+      Toast.show('Material excluído');
       this.render();
     }
   },

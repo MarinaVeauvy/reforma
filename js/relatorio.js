@@ -1,7 +1,7 @@
 // relatorio.js — Geração de relatório PDF
 const Relatorio = {
   async gerar() {
-    Toast.show('Gerando relatorio...');
+    Toast.show('Gerando relatório...');
 
     // Carregar jsPDF sob demanda
     if (typeof jspdf === 'undefined') {
@@ -48,7 +48,7 @@ const Relatorio = {
     // ===== CAPA =====
     doc.setFontSize(24);
     doc.setFont(undefined, 'bold');
-    doc.text('Relatorio da Reforma', marginLeft, 40);
+    doc.text('Relatório da Reforma', marginLeft, 40);
     doc.setFontSize(12);
     doc.setFont(undefined, 'normal');
     doc.text(`Gerado em: ${new Date().toLocaleDateString('pt-BR')}`, marginLeft, 50);
@@ -56,7 +56,7 @@ const Relatorio = {
     const orc = Storage.getOrcamento();
     const totalOrc = orc.churrasqueira + orc.banheiro + orc.quarto + orc.geral;
     const totalGasto = Storage.getTotalGastos();
-    doc.text(`Orcamento Total: ${Fmt.moeda(totalOrc)}`, marginLeft, 60);
+    doc.text(`Orçamento Total: ${Fmt.moeda(totalOrc)}`, marginLeft, 60);
     doc.text(`Total Gasto: ${Fmt.moeda(totalGasto)}`, marginLeft, 68);
     doc.text(`Saldo: ${Fmt.moeda(totalOrc - totalGasto)}`, marginLeft, 76);
 
@@ -68,7 +68,7 @@ const Relatorio = {
     // ===== GASTOS POR CÔMODO =====
     doc.addPage();
     y = 20;
-    addTitle('Gastos por Comodo');
+    addTitle('Gastos por Cômodo');
     addSep();
 
     const comodos = ['churrasqueira', 'banheiro', 'quarto', 'geral'];
@@ -109,7 +109,7 @@ const Relatorio = {
     // ===== MÃO DE OBRA =====
     doc.addPage();
     y = 20;
-    addTitle('Mao de Obra');
+    addTitle('Mão de Obra');
     addSep();
 
     const profissionais = Storage.getAll('profissionais');
@@ -144,7 +144,7 @@ const Relatorio = {
 
     // ===== SALVAR =====
     doc.save(`relatorio-reforma-${Fmt.hoje()}.pdf`);
-    Toast.show('Relatorio PDF gerado!');
+    Toast.show('Relatório PDF gerado!');
   },
 
   _loadScript(src) {

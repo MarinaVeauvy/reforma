@@ -21,10 +21,10 @@ const Calculadora = {
       calcular: (l, c) => ({ quantidade: Math.ceil(l * c * 0.5), label: 'kg (0.5kg/m2)' }),
     },
     tinta: {
-      nome: 'Tinta (2 demaos)',
+      nome: 'Tinta (2 demãos)',
       unidade: 'lata 3.6L',
       campos: ['largura', 'altura'],
-      calcular: (l, a) => ({ quantidade: Math.ceil((l * a * 2) / 40), label: 'latas 3.6L (40m2/lata, 2 demaos)' }),
+      calcular: (l, a) => ({ quantidade: Math.ceil((l * a * 2) / 40), label: 'latas 3.6L (40m2/lata, 2 demãos)' }),
     },
     massa_corrida: {
       nome: 'Massa corrida',
@@ -148,6 +148,6 @@ const Calculadora = {
     });
 
     Modal.close('modal-calculadora');
-    Toast.show('Preencha o preco e comodo');
+    Toast.show('Preencha o preço e cômodo');
   },
 };

@@ -33,9 +33,9 @@ const Fornecedores = {
               ${f.endereco ? ' - ' + f.endereco : ''}
             </div>
           </div>
-          <span class="text-sm text-muted">${cotacoes.length} cotacao(oes)</span>
+          <span class="text-sm text-muted">${cotacoes.length} cotação(ões)</span>
           <div class="item-actions">
-            <button class="btn-icon" onclick="Fornecedores.addCotacao('${f.id}')" title="Nova cotacao">$</button>
+            <button class="btn-icon" onclick="Fornecedores.addCotacao('${f.id}')" title="Nova cotação">$</button>
             <button class="btn-icon" onclick="Fornecedores.edit('${f.id}')" title="Editar">&#9998;</button>
             <button class="btn-icon danger" onclick="Fornecedores.confirmDelete('${f.id}')" title="Excluir">✕</button>
           </div>
@@ -89,12 +89,12 @@ const Fornecedores = {
   },
 
   async confirmDelete(id) {
-    const ok = await Confirm.show('Excluir fornecedor e suas cotacoes?');
+    const ok = await Confirm.show('Excluir fornecedor e suas cotações?');
     if (ok) {
       const cotacoes = Storage.getAll('cotacoes').filter(c => c.fornecedorId !== id);
       Storage.save('cotacoes', cotacoes);
       Storage.remove('fornecedores', id);
-      Toast.show('Fornecedor excluido');
+      Toast.show('Fornecedor excluído');
       this.render();
     }
   },
@@ -105,7 +105,7 @@ const Fornecedores = {
     document.getElementById('cot-fornecedor-id').value = fornecedorId;
     const forn = Storage.getById('fornecedores', fornecedorId);
     document.getElementById('modal-cotacao-title').textContent =
-      `Cotacao - ${forn ? forn.nome : ''}`;
+      `Cotação - ${forn ? forn.nome : ''}`;
     Modal.open('modal-cotacao');
   },
 
@@ -116,7 +116,7 @@ const Fornecedores = {
     const unidade = document.getElementById('cot-unidade').value;
     const obs = document.getElementById('cot-obs').value.trim();
 
-    if (!material || !preco) { Toast.show('Preencha material e preco'); return; }
+    if (!material || !preco) { Toast.show('Preencha material e preço'); return; }
 
     Storage.add('cotacoes', {
       fornecedorId,
@@ -127,7 +127,7 @@ const Fornecedores = {
       data: Fmt.hoje(),
     });
 
-    Toast.show('Cotacao salva!');
+    Toast.show('Cotação salva!');
     Modal.closeAll();
     this.render();
   },
@@ -150,7 +150,7 @@ const Fornecedores = {
 
     const materiais = Object.keys(porMaterial);
     if (materiais.length === 0) {
-      container.innerHTML = '<p class="text-muted text-sm text-center">Adicione cotacoes para comparar precos</p>';
+      container.innerHTML = '<p class="text-muted text-sm text-center">Adicione cotações para comparar preços</p>';
       return;
     }
 
@@ -194,7 +194,7 @@ const ListaCompras = {
       container.innerHTML = `
         <div class="empty-state">
           <div class="empty-icon">&#128722;</div>
-          <p>Todos os materiais ja foram comprados!</p>
+          <p>Todos os materiais já foram comprados!</p>
         </div>
       `;
       return;

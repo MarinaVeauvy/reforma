@@ -67,7 +67,7 @@ const Cronograma = {
 
     document.getElementById('crono-progresso').textContent = `${pct}%`;
     document.getElementById('crono-count').textContent =
-      `${concluidas}/${totalTarefas} concluida(s)`;
+      `${concluidas}/${totalTarefas} concluída(s)`;
 
     // Progress bar por cômodo
     this.renderProgressComodos();
@@ -160,7 +160,7 @@ const Cronograma = {
     const status = document.getElementById('tarefa-status').value;
 
     if (!descricao) {
-      Toast.show('Preencha a descricao da tarefa');
+      Toast.show('Preencha a descrição da tarefa');
       return;
     }
 
@@ -198,7 +198,7 @@ const Cronograma = {
     const ok = await Confirm.show('Excluir esta tarefa?');
     if (ok) {
       Storage.remove('tarefas', id);
-      Toast.show('Tarefa excluida');
+      Toast.show('Tarefa excluída');
       this.render();
     }
   },
