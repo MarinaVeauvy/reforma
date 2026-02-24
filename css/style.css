@@ -890,3 +890,90 @@ select.form-control {
   .calc-grid { grid-template-columns: repeat(3, 1fr); }
   .mais-grid { grid-template-columns: repeat(3, 1fr); }
 }
+
+/* ===== ALERTAS ===== */
+.alerta {
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.alerta-danger { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+.alerta-warning { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+.alerta-info { background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
+
+[data-theme="dark"] .alerta-danger { background: #450a0a; color: #fca5a5; border-color: #7f1d1d; }
+[data-theme="dark"] .alerta-warning { background: #451a03; color: #fcd34d; border-color: #78350f; }
+[data-theme="dark"] .alerta-info { background: #172554; color: #93c5fd; border-color: #1e3a5f; }
+
+/* ===== BUSCA GLOBAL ===== */
+.busca-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 200;
+  flex-direction: column;
+}
+
+.busca-overlay.active { display: flex; }
+
+.busca-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.busca-header input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background: transparent;
+  color: var(--text);
+}
+
+.busca-resultados {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+/* ===== APRESENTAÇÃO ===== */
+.apresentacao-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 200;
+  overflow-y: auto;
+}
+
+.apresentacao-overlay.active { display: block; }
+
+.apresentacao-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 1;
+}
+
+/* ===== QR CODE ===== */
+.qr-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.qr-container img {
+  max-width: 250px;
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+}

@@ -78,6 +78,7 @@ const Materiais = {
           </div>
           <div class="item-actions">
             <button class="btn-icon" onclick="Materiais.cycleStatus('${m.id}')" title="Mudar status">&#8635;</button>
+            <button class="btn-icon" onclick="Duplicar.material('${m.id}')" title="Duplicar">&#9112;</button>
             <button class="btn-icon" onclick="Materiais.edit('${m.id}')" title="Editar">&#9998;</button>
             <button class="btn-icon danger" onclick="Materiais.confirmDelete('${m.id}')" title="Excluir">&#10005;</button>
           </div>

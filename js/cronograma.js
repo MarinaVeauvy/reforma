@@ -98,6 +98,7 @@ const Cronograma = {
         <span class="status-badge ${t.status.replace(/\s/g, '-')}">${t.status}</span>
         <div class="item-actions">
           <button class="btn-icon" onclick="Cronograma.cycleStatus('${t.id}')" title="Mudar status">&#8635;</button>
+          <button class="btn-icon" onclick="Duplicar.tarefa('${t.id}')" title="Duplicar">&#9112;</button>
           <button class="btn-icon" onclick="Cronograma.edit('${t.id}')" title="Editar">&#9998;</button>
           <button class="btn-icon danger" onclick="Cronograma.confirmDelete('${t.id}')" title="Excluir">&#10005;</button>
         </div>

@@ -20,6 +20,8 @@ const App = {
     PlantaFotos.init();
     Recibos.init();
     Fornecedores.init();
+    MoedaMask.init();
+    CategoriasCustom.refreshSelects();
   },
 
   // PWA Service Worker
@@ -88,11 +90,13 @@ const App = {
       'lista-compras': 'Lista de Compras',
       'calculadora': 'Calculadora',
       'relatorio': 'Relatório',
+      'historico': 'Histórico',
     };
     document.getElementById('header-title').textContent = titles[subPage] || 'Mais';
 
     // Render sub-pages
     if (subPage === 'planta-fotos') PlantaFotos.render();
+    if (subPage === 'historico') Historico.render();
     if (subPage === 'recibos') Recibos.render();
     if (subPage === 'fornecedores') Fornecedores.render();
     if (subPage === 'comparativo') Fornecedores.renderComparativo();

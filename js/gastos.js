@@ -73,6 +73,7 @@ const Gastos = {
         </div>
         <div class="item-value">${Fmt.moeda(g.valor)}</div>
         <div class="item-actions">
+          <button class="btn-icon" onclick="Duplicar.gasto('${g.id}')" title="Duplicar">&#9112;</button>
           <button class="btn-icon" onclick="Gastos.edit('${g.id}')" title="Editar">&#9998;</button>
           <button class="btn-icon danger" onclick="Gastos.confirmDelete('${g.id}')" title="Excluir">&#10005;</button>
         </div>
@@ -120,12 +121,22 @@ const Gastos = {
     const reciboId = form.dataset.reciboId;
     if (reciboId) item.reciboId = reciboId;
 
+    // Parcelamento
+    const parcelado = document.getElementById('gasto-parcelado')?.checked;
+    const numParcelas = parseInt(document.getElementById('gasto-num-parcelas')?.value) || 1;
+
     if (this.editingId) {
       Storage.update('gastos', this.editingId, item);
+      Historico.registrar('editar', 'gasto', descricao);
       Toast.show('Gasto atualizado!');
+    } else if (parcelado && numParcelas > 1) {
+      // Gerar parcelas
+      const parcelas = Parcelamento.gerarParcelas(item, numParcelas);
+      parcelas.forEach(p => Storage.add('gastos', p));
+      Historico.registrar('criar', 'gasto', `${descricao} (${numParcelas}x)`);
+      Toast.show(`${numParcelas} parcelas criadas!`);
     } else {
       const saved = Storage.add('gastos', item);
-      // Marcar recibo como vinculado
       if (reciboId) {
         ImageDB.getById(reciboId).then(recibo => {
           if (recibo) {
@@ -135,6 +146,7 @@ const Gastos = {
           }
         });
       }
+      Historico.registrar('criar', 'gasto', descricao);
       Toast.show('Gasto adicionado!');
     }
 

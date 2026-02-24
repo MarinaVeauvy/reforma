@@ -16,6 +16,7 @@
   <header class="header">
     <h1 id="header-title">Painel</h1>
     <div class="header-actions">
+      <button class="header-btn" onclick="BuscaGlobal.toggle()" title="Buscar">&#128269;</button>
       <button class="header-btn" id="btn-theme" title="Tema escuro/claro">&#9790;</button>
       <button class="header-btn" id="btn-backup" title="Backup">&#9776;</button>
     </div>
@@ -23,6 +24,9 @@
 
   <!-- ===== DASHBOARD ===== -->
   <section class="page active" id="page-dashboard">
+    <!-- Alertas -->
+    <div id="dash-alertas"></div>
+
     <div class="summary-grid">
       <div class="summary-card">
         <div class="label">Total Gasto</div>
@@ -58,6 +62,12 @@
     <div class="card">
       <div class="card-header"><span class="card-title">Gasto por Categoria</span></div>
       <div class="bar-chart" id="dash-chart-categoria"></div>
+    </div>
+
+    <!-- Evolução temporal -->
+    <div class="card">
+      <div class="card-header"><span class="card-title">Evolução dos Gastos</span></div>
+      <div id="dash-timeline"></div>
     </div>
 
     <div class="card">
@@ -235,6 +245,31 @@
           <span class="mais-label">Relatório PDF</span>
           <span class="mais-desc">Exportar relatório completo</span>
         </div>
+        <div class="mais-item" onclick="Apresentacao.abrir()">
+          <span class="mais-icon">&#128250;</span>
+          <span class="mais-label">Apresentação</span>
+          <span class="mais-desc">Visão resumida para reunião</span>
+        </div>
+        <div class="mais-item" onclick="WhatsApp.compartilharResumo()">
+          <span class="mais-icon">&#128172;</span>
+          <span class="mais-label">WhatsApp</span>
+          <span class="mais-desc">Compartilhar resumo</span>
+        </div>
+        <div class="mais-item" onclick="QRCode.gerar()">
+          <span class="mais-icon">&#9638;</span>
+          <span class="mais-label">QR Code</span>
+          <span class="mais-desc">Compartilhar link do app</span>
+        </div>
+        <div class="mais-item" onclick="App.navigateSub('historico')">
+          <span class="mais-icon">&#128338;</span>
+          <span class="mais-label">Histórico</span>
+          <span class="mais-desc">Log de alterações</span>
+        </div>
+        <div class="mais-item" onclick="CategoriasCustom.openModal()">
+          <span class="mais-icon">&#9881;</span>
+          <span class="mais-label">Categorias</span>
+          <span class="mais-desc">Adicionar categorias e cômodos</span>
+        </div>
         <div class="mais-item" onclick="App.openBackupModal()">
           <span class="mais-icon">&#128190;</span>
           <span class="mais-label">Backup</span>
@@ -308,6 +343,17 @@
       </div>
 
       <div id="comparativo-lista"></div>
+    </div>
+
+    <!-- Sub: Histórico -->
+    <div class="sub-page" id="sub-historico">
+      <div class="sub-header">
+        <button class="sub-back" onclick="App.backToMais()">&#8592;</button>
+        <h2 style="font-size:1rem">Histórico de Alterações</h2>
+      </div>
+      <div class="card">
+        <div id="historico-lista"></div>
+      </div>
     </div>
 
     <!-- Sub: Lista de Compras -->
@@ -400,6 +446,13 @@
                 <option value="geral">Geral</option>
               </select>
             </div>
+          </div>
+          <div class="form-group">
+            <label><input type="checkbox" id="gasto-parcelado" onchange="Parcelamento.toggleFields()"> Parcelado</label>
+          </div>
+          <div class="form-group hidden" id="gasto-parcelas-group">
+            <label for="gasto-num-parcelas">Número de Parcelas</label>
+            <input type="number" id="gasto-num-parcelas" class="form-control" min="2" max="48" value="2" placeholder="2">
           </div>
           <div class="form-group">
             <label for="gasto-pagamento">Forma de Pagamento</label>
@@ -827,6 +880,67 @@
     <img id="fullscreen-img" src="" alt="Imagem">
   </div>
 
+  <!-- Busca Global -->
+  <div class="busca-overlay" id="busca-overlay">
+    <div class="busca-header">
+      <button onclick="BuscaGlobal.toggle()" style="background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--text)">&#8592;</button>
+      <input type="text" id="busca-input" placeholder="Buscar gastos, materiais, tarefas..." oninput="BuscaGlobal.buscar()">
+    </div>
+    <div class="busca-resultados" id="busca-resultados"></div>
+  </div>
+
+  <!-- Modo Apresentação -->
+  <div class="apresentacao-overlay" id="apresentacao-overlay">
+    <div class="apresentacao-header">
+      <button class="btn btn-secondary" onclick="Apresentacao.fechar()" style="width:auto;padding:8px 14px">&#8592; Voltar</button>
+      <button class="btn btn-secondary" onclick="WhatsApp.compartilharResumo()" style="width:auto;padding:8px 14px">&#128172; WhatsApp</button>
+    </div>
+    <div id="apresentacao-content"></div>
+  </div>
+
+  <!-- Modal: QR Code -->
+  <div class="modal-overlay" id="modal-qrcode">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>QR Code</h2>
+        <button class="modal-close" onclick="Modal.close('modal-qrcode')">&times;</button>
+      </div>
+      <div class="modal-body qr-container">
+        <img id="qr-img" src="" alt="QR Code">
+        <p class="text-sm text-muted" id="qr-url"></p>
+        <button class="btn btn-primary mt-8" onclick="QRCode.copiarLink()">Copiar Link</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Categorias Custom -->
+  <div class="modal-overlay" id="modal-categorias">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Categorias e Cômodos</h2>
+        <button class="modal-close" onclick="Modal.close('modal-categorias')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Categorias de Gastos Extras</label>
+          <div id="cat-extras-lista" class="mb-8" style="display:flex;flex-wrap:wrap;gap:6px"></div>
+          <div style="display:flex;gap:8px">
+            <input type="text" id="add-categoria-input" class="form-control" placeholder="Nova categoria">
+            <button class="btn btn-primary" onclick="CategoriasCustom.addFromInput('categoria')" style="width:auto;padding:10px 16px">+</button>
+          </div>
+        </div>
+        <div class="form-group mt-16">
+          <label>Cômodos Extras</label>
+          <div id="comodo-extras-lista" class="mb-8" style="display:flex;flex-wrap:wrap;gap:6px"></div>
+          <div style="display:flex;gap:8px">
+            <input type="text" id="add-comodo-input" class="form-control" placeholder="Novo cômodo">
+            <button class="btn btn-primary" onclick="CategoriasCustom.addFromInput('comodo')" style="width:auto;padding:10px 16px">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Confirm Dialog -->
   <div class="confirm-overlay" id="confirm-overlay">
     <div class="confirm-box">
@@ -855,5 +969,6 @@
   <script src="js/fornecedores.js"></script>
   <script src="js/relatorio.js"></script>
   <script src="js/importador.js"></script>
+  <script src="js/utils.js"></script>
 </body>
 </html>

@@ -5,11 +5,108 @@ const Dashboard = {
   },
 
   refresh() {
+    this.renderAlertas();
     this.renderSummary();
     this.renderComodoChart();
     this.renderCategoriaChart();
+    this.renderTimelineChart();
     this.renderProximasTarefas();
     this.renderOrcamentoProgress();
+  },
+
+  // Alertas de atraso e orçamento estourado
+  renderAlertas() {
+    const container = document.getElementById('dash-alertas');
+    if (!container) return;
+    const alertas = [];
+
+    // Tarefas atrasadas
+    const hoje = Fmt.hoje();
+    const atrasadas = Storage.getAll('tarefas').filter(t =>
+      t.dataFim && t.dataFim < hoje && t.status !== 'concluido'
+    );
+    if (atrasadas.length > 0) {
+      alertas.push(`<div class="alerta alerta-danger">⚠️ <strong>${atrasadas.length} tarefa(s) atrasada(s)!</strong> ${atrasadas.map(t => t.descricao).slice(0, 3).join(', ')}</div>`);
+    }
+
+    // Orçamento estourado
+    const orc = Storage.getOrcamento();
+    const comodos = ['churrasqueira', 'banheiro', 'quarto'];
+    comodos.forEach(c => {
+      if (orc[c] > 0) {
+        const gasto = Storage.getTotalGastos({ comodo: c });
+        if (gasto > orc[c]) {
+          alertas.push(`<div class="alerta alerta-danger">💰 <strong>${c.charAt(0).toUpperCase() + c.slice(1)}</strong> estourou o orçamento! ${Fmt.moeda(gasto)} / ${Fmt.moeda(orc[c])}</div>`);
+        } else if (gasto >= orc[c] * 0.9) {
+          alertas.push(`<div class="alerta alerta-warning">💡 <strong>${c.charAt(0).toUpperCase() + c.slice(1)}</strong> perto do limite: ${Fmt.moeda(gasto)} / ${Fmt.moeda(orc[c])}</div>`);
+        }
+      }
+    });
+
+    // Materiais pendentes urgentes
+    const pendentes = Storage.getAll('materiais').filter(m => m.status === 'pendente');
+    if (pendentes.length > 10) {
+      alertas.push(`<div class="alerta alerta-info">📦 ${pendentes.length} materiais pendentes de compra</div>`);
+    }
+
+    container.innerHTML = alertas.join('');
+  },
+
+  // Gráfico de evolução temporal de gastos
+  renderTimelineChart() {
+    const container = document.getElementById('dash-timeline');
+    if (!container) return;
+
+    const gastos = Storage.getAll('gastos').filter(g => g.data).sort((a, b) => a.data.localeCompare(b.data));
+    if (gastos.length < 2) {
+      container.innerHTML = '<p class="text-muted text-sm text-center">Mínimo 2 gastos com data para gerar gráfico</p>';
+      return;
+    }
+
+    // Agrupar por dia (acumulado)
+    const porDia = {};
+    gastos.forEach(g => {
+      const dia = g.data.slice(0, 10);
+      porDia[dia] = (porDia[dia] || 0) + (parseFloat(g.valor) || 0);
+    });
+
+    const dias = Object.keys(porDia).sort();
+    let acumulado = 0;
+    const pontos = dias.map(dia => {
+      acumulado += porDia[dia];
+      return { dia, valor: acumulado, gasto: porDia[dia] };
+    });
+
+    const maxVal = Math.max(...pontos.map(p => p.valor));
+    const chartH = 120;
+
+    // SVG line chart
+    const w = 100;
+    const pts = pontos.map((p, i) => {
+      const x = pontos.length === 1 ? 50 : (i / (pontos.length - 1)) * w;
+      const y = chartH - (p.valor / maxVal) * (chartH - 10);
+      return `${x},${y}`;
+    });
+
+    const polyline = pts.join(' ');
+    const area = `0,${chartH} ${polyline} ${w},${chartH}`;
+
+    container.innerHTML = `
+      <svg viewBox="0 0 ${w} ${chartH + 5}" style="width:100%;height:${chartH + 30}px" preserveAspectRatio="none">
+        <polygon points="${area}" fill="rgba(37,99,235,0.1)" />
+        <polyline points="${polyline}" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        ${pontos.map((p, i) => {
+          const x = pontos.length === 1 ? 50 : (i / (pontos.length - 1)) * w;
+          const y = chartH - (p.valor / maxVal) * (chartH - 10);
+          return `<circle cx="${x}" cy="${y}" r="1.5" fill="var(--primary)" />`;
+        }).join('')}
+      </svg>
+      <div class="flex-between text-sm text-muted" style="margin-top:4px">
+        <span>${Fmt.data(dias[0])}</span>
+        <span class="fw-bold">${Fmt.moeda(acumulado)}</span>
+        <span>${Fmt.data(dias[dias.length - 1])}</span>
+      </div>
+    `;
   },
 
   renderSummary() {
