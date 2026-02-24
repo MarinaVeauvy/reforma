@@ -1,0 +1,34 @@
+MODELOS DE PLANILHA - GESTÃO DE REFORMA
+========================================
+
+Estes arquivos CSV são modelos para importar dados no app.
+Abra no Excel, Google Sheets ou LibreOffice, preencha com seus dados
+e depois importe pelo app (Painel > Importar PDF/Planilha ou Mais > Importar Dados).
+
+ARQUIVOS:
+---------
+1. gastos.csv        → Despesas realizadas (valor, data, categoria, cômodo)
+2. materiais.csv     → Lista de materiais (quantidade, preço, status)
+3. tarefas.csv       → Cronograma de tarefas (datas, responsável)
+4. profissionais.csv → Mão de obra (especialidade, contato, valor)
+
+COMO USAR:
+----------
+1. Abra o arquivo .csv no Excel ou Google Sheets
+2. Substitua os dados de exemplo pelos seus dados reais
+3. Salve como .csv (separado por ponto-e-vírgula)
+4. No app, vá em "Importar Dados"
+5. Selecione o tipo (Gastos, Materiais, etc.)
+6. Clique "Escolher Arquivo" e selecione o .csv
+7. Confira a prévia e clique "Confirmar Importação"
+
+FORMATO:
+--------
+- Separador: ponto-e-vírgula (;)
+- Valores monetários: usar ponto como decimal (35.90)
+- Datas: formato AAAA-MM-DD (2026-03-15)
+- Cômodos: churrasqueira, banheiro, quarto (ou seus nomes personalizados)
+- Categorias gastos: material, mao-de-obra, frete, ferramentas, outros
+- Status materiais: pendente, comprado, entregue, aplicado
+- Status tarefas: pendente, em andamento, concluido
+- Tipo cobrança: diaria, empreitada

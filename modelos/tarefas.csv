@@ -1,0 +1,28 @@
+descrição;cômodo;data início;data fim;responsável;status
+Demolição e limpeza do terreno;churrasqueira;2026-03-01;2026-03-02;Pedreiro;pendente
+Fundação e contrapiso;churrasqueira;2026-03-03;2026-03-05;Pedreiro;pendente
+Alvenaria (paredes);churrasqueira;2026-03-06;2026-03-10;Pedreiro;pendente
+Estrutura do telhado;churrasqueira;2026-03-11;2026-03-13;Pedreiro;pendente
+Instalação elétrica;churrasqueira;2026-03-14;2026-03-15;Eletricista;pendente
+Instalação hidráulica;churrasqueira;2026-03-14;2026-03-15;Encanador;pendente
+Reboco;churrasqueira;2026-03-16;2026-03-18;Pedreiro;pendente
+Assentamento do piso;churrasqueira;2026-03-19;2026-03-20;Pedreiro;pendente
+Montagem da churrasqueira;churrasqueira;2026-03-21;2026-03-22;Pedreiro;pendente
+Instalação pia e bancada;churrasqueira;2026-03-23;2026-03-23;Pedreiro;pendente
+Acabamento e limpeza;churrasqueira;2026-03-24;2026-03-25;Pedreiro;pendente
+Demolição revestimento antigo;banheiro;2026-03-03;2026-03-04;Pedreiro;pendente
+Instalação hidráulica nova;banheiro;2026-03-05;2026-03-07;Encanador;pendente
+Instalação elétrica;banheiro;2026-03-05;2026-03-06;Eletricista;pendente
+Contrapiso e impermeabilização;banheiro;2026-03-08;2026-03-09;Pedreiro;pendente
+Revestimento piso e parede;banheiro;2026-03-10;2026-03-13;Pedreiro;pendente
+Rejuntamento;banheiro;2026-03-14;2026-03-14;Pedreiro;pendente
+Instalação louças e metais;banheiro;2026-03-15;2026-03-16;Encanador;pendente
+Instalação box blindex;banheiro;2026-03-17;2026-03-17;Vidraceiro;pendente
+Acabamento final;banheiro;2026-03-18;2026-03-18;Pedreiro;pendente
+Preparação das paredes (lixar, massa);quarto;2026-03-08;2026-03-10;Pintor;pendente
+Pintura 1ª demão;quarto;2026-03-11;2026-03-12;Pintor;pendente
+Pintura 2ª demão;quarto;2026-03-13;2026-03-14;Pintor;pendente
+Instalação elétrica (tomadas, interruptores);quarto;2026-03-15;2026-03-16;Eletricista;pendente
+Instalação piso laminado;quarto;2026-03-17;2026-03-18;Pedreiro;pendente
+Instalação rodapé;quarto;2026-03-19;2026-03-19;Pedreiro;pendente
+Limpeza final;quarto;2026-03-20;2026-03-20;Todos;pendente

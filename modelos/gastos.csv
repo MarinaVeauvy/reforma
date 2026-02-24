@@ -1,0 +1,21 @@
+descrição;valor;data;categoria;cômodo;pagamento
+Cimento CP-II 50kg (10 sacos);359.00;2026-03-01;material;churrasqueira;pix
+Areia média 3m³;280.00;2026-03-01;material;churrasqueira;dinheiro
+Brita 1 - 2m³;240.00;2026-03-01;material;churrasqueira;dinheiro
+Ferro 3/8 (20 barras);320.00;2026-03-02;material;churrasqueira;cartao-debito
+Tijolo baiano (500 un);375.00;2026-03-02;material;churrasqueira;pix
+Frete materiais;150.00;2026-03-02;frete;churrasqueira;dinheiro
+Porcelanato 60x60 (25m²);2247.50;2026-03-05;material;banheiro;cartao-credito
+Argamassa AC-III (10 sacos);289.00;2026-03-05;material;banheiro;pix
+Rejunte flexível 5kg;45.00;2026-03-05;material;banheiro;pix
+Vaso sanitário com caixa acoplada;489.00;2026-03-06;material;banheiro;cartao-credito
+Cuba de apoio;259.00;2026-03-06;material;banheiro;cartao-credito
+Torneira monocomando;189.00;2026-03-06;material;banheiro;cartao-credito
+Chuveiro elétrico;159.00;2026-03-06;material;banheiro;pix
+Kit acessórios banheiro;89.00;2026-03-06;material;banheiro;pix
+Tinta Coral 18L (2 latas);578.00;2026-03-08;material;quarto;cartao-debito
+Massa corrida 25kg (2 latas);148.00;2026-03-08;material;quarto;pix
+Lixa e rolo de pintura;45.00;2026-03-08;ferramentas;quarto;dinheiro
+Fita crepe e lona plástica;32.00;2026-03-08;ferramentas;quarto;dinheiro
+Pedreiro - semana 1;1500.00;2026-03-07;mao-de-obra;geral;pix
+Eletricista;800.00;2026-03-10;mao-de-obra;quarto;pix
