@@ -64,6 +64,13 @@
       <div class="card-header"><span class="card-title">Proximas Tarefas</span></div>
       <div id="dash-proximas-tarefas"></div>
     </div>
+
+    <!-- Atalho importar -->
+    <div class="card" style="text-align:center">
+      <button class="btn btn-secondary" onclick="Importador.openModal()" style="width:auto">
+        &#128228; Importar PDF / Planilha / Dados
+      </button>
+    </div>
   </section>
 
   <!-- ===== GASTOS ===== -->
@@ -217,6 +224,11 @@
           <span class="mais-icon">&#128208;</span>
           <span class="mais-label">Calculadora</span>
           <span class="mais-desc">Calcular materiais por area</span>
+        </div>
+        <div class="mais-item" onclick="Importador.openModal()">
+          <span class="mais-icon">&#128228;</span>
+          <span class="mais-label">Importar Dados</span>
+          <span class="mais-desc">PDF, planilha ou manual</span>
         </div>
         <div class="mais-item" onclick="Relatorio.gerar()">
           <span class="mais-icon">&#128196;</span>
@@ -751,6 +763,64 @@
     </div>
   </div>
 
+  <!-- Modal: Importador -->
+  <div class="modal-overlay" id="modal-importador">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Importar Dados</h2>
+        <button class="modal-close" onclick="Modal.close('modal-importador')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="import-tipo">Tipo de dados</label>
+          <select id="import-tipo" class="form-control">
+            <option value="gastos">Gastos / Despesas</option>
+            <option value="materiais">Materiais</option>
+            <option value="tarefas">Tarefas / Cronograma</option>
+            <option value="profissionais">Profissionais</option>
+          </select>
+        </div>
+
+        <!-- Area de arquivo -->
+        <div id="import-file-area">
+          <p class="text-sm text-muted mb-8">Envie um PDF (orcamento, nota fiscal) ou CSV/TXT com os dados.</p>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <button class="btn btn-primary" onclick="Importador.importarArquivo()">&#128196; Escolher Arquivo (PDF / CSV)</button>
+            <button class="btn btn-secondary" onclick="Importador.mostrarManual()">&#9998; Digitar / Colar Manualmente</button>
+          </div>
+          <p class="text-sm text-muted mt-16"><strong>Formato CSV (gastos):</strong><br>
+            descricao; valor; data; categoria; comodo<br>
+            <em>Ex: Cimento 50kg; 35.90; 2026-02-20; material; churrasqueira</em>
+          </p>
+          <p class="text-sm text-muted mt-8"><strong>Formato CSV (materiais):</strong><br>
+            nome; quantidade; unidade; preco; comodo; status<br>
+            <em>Ex: Porcelanato 60x60; 25; m2; 89.90; banheiro; pendente</em>
+          </p>
+        </div>
+
+        <!-- Area manual -->
+        <div id="import-manual-area" class="hidden">
+          <button class="btn btn-secondary mb-8" onclick="Importador.voltarArquivo()" style="width:auto;padding:6px 12px;font-size:0.8rem">&#8592; Voltar</button>
+          <div class="form-group">
+            <label>Cole ou digite os dados (um item por linha, separado por ;)</label>
+            <textarea id="import-manual-text" class="form-control" rows="8" placeholder="Cole os dados aqui..."></textarea>
+          </div>
+          <button class="btn btn-primary" onclick="Importador.processarManual()">Processar Dados</button>
+        </div>
+
+        <!-- Preview -->
+        <div id="import-preview" class="hidden">
+          <div class="flex-between mb-8">
+            <span class="fw-bold text-sm" id="import-total-count">0 item(s)</span>
+            <button class="btn btn-secondary" onclick="Importador.openModal()" style="width:auto;padding:6px 12px;font-size:0.8rem">Recomecar</button>
+          </div>
+          <div id="import-preview-lista" style="max-height:300px;overflow-y:auto"></div>
+          <button class="btn btn-primary mt-16" onclick="Importador.confirmarImportacao()">Confirmar Importacao</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Fullscreen Image Viewer -->
   <div class="fullscreen-overlay" id="fullscreen-overlay" onclick="PlantaFotos.closeFullscreen()">
     <button class="fullscreen-close">&times;</button>
@@ -784,5 +854,6 @@
   <script src="js/calculadora.js"></script>
   <script src="js/fornecedores.js"></script>
   <script src="js/relatorio.js"></script>
+  <script src="js/importador.js"></script>
 </body>
 </html>

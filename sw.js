@@ -1,21 +1,21 @@
 // Service Worker — Cache offline para PWA
-const CACHE_NAME = 'reforma-v2';
+const CACHE_NAME = 'reforma-v3';
 const ASSETS = [
-  '/',
-  '/index.html',
-  '/css/style.css',
-  '/js/storage.js',
-  '/js/app.js',
-  '/js/dashboard.js',
-  '/js/gastos.js',
-  '/js/materiais.js',
-  '/js/mao-de-obra.js',
-  '/js/cronograma.js',
-  '/js/planta-fotos.js',
-  '/js/recibos.js',
-  '/js/calculadora.js',
-  '/js/fornecedores.js',
-  '/js/relatorio.js',
+  './',
+  './index.html',
+  './css/style.css',
+  './js/storage.js',
+  './js/app.js',
+  './js/dashboard.js',
+  './js/gastos.js',
+  './js/materiais.js',
+  './js/mao-de-obra.js',
+  './js/cronograma.js',
+  './js/planta-fotos.js',
+  './js/recibos.js',
+  './js/calculadora.js',
+  './js/fornecedores.js',
+  './js/relatorio.js',
 ];
 
 // Instalar: cachear assets
@@ -38,7 +38,7 @@ self.addEventListener('activate', (e) => {
 
 // Fetch: cache-first, fallback para rede
 self.addEventListener('fetch', (e) => {
-  // Ignorar requests de CDN (Tesseract, jsPDF) — sempre da rede
+  // Ignorar requests de CDN (Tesseract, jsPDF, pdf.js) — sempre da rede
   if (!e.request.url.startsWith(self.location.origin)) return;
 
   e.respondWith(
@@ -51,7 +51,7 @@ self.addEventListener('fetch', (e) => {
       });
     }).catch(() => {
       if (e.request.mode === 'navigate') {
-        return caches.match('/index.html');
+        return caches.match('./index.html');
       }
     })
   );

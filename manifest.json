@@ -2,7 +2,7 @@
   "name": "Gestao de Reforma",
   "short_name": "Reforma",
   "description": "Controle completo da sua reforma: gastos, materiais, mao de obra e cronograma",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2563eb",

@@ -149,7 +149,7 @@ const Recibos = {
       if (ano.length === 2) ano = '20' + ano;
       const d = parseInt(dia), m = parseInt(mes);
       if (d >= 1 && d <= 31 && m >= 1 && m <= 12) {
-        result.data = `${ano}-${mes.padStart(2, '0')}-${dia.padStart(2, '0')}`;
+        result.data = `${ano}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
       }
     }
 

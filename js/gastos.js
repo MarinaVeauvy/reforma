@@ -115,13 +115,31 @@ const Gastos = {
 
     const item = { descricao, valor: parseFloat(valor), data, categoria, comodo, formaPagamento };
 
+    // Vincular recibo se veio de OCR
+    const form = document.getElementById('form-gasto');
+    const reciboId = form.dataset.reciboId;
+    if (reciboId) item.reciboId = reciboId;
+
     if (this.editingId) {
       Storage.update('gastos', this.editingId, item);
       Toast.show('Gasto atualizado!');
     } else {
-      Storage.add('gastos', item);
+      const saved = Storage.add('gastos', item);
+      // Marcar recibo como vinculado
+      if (reciboId) {
+        ImageDB.getById(reciboId).then(recibo => {
+          if (recibo) {
+            recibo.vinculado = true;
+            recibo.gastoId = saved.id;
+            ImageDB.add({ ...recibo }).catch(() => {});
+          }
+        });
+      }
       Toast.show('Gasto adicionado!');
     }
+
+    // Limpar ref do recibo
+    delete form.dataset.reciboId;
 
     Modal.closeAll();
     this.render();
