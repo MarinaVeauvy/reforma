@@ -1,25 +1,177 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <defs>
+    <!-- Background gradient -->
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1e40af"/>
+      <stop offset="0%" stop-color="#0f2557"/>
+      <stop offset="50%" stop-color="#1e40af"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+
+    <!-- Roof gradient -->
+    <linearGradient id="roof" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#e0e7f1"/>
+    </linearGradient>
+
+    <!-- House body gradient -->
+    <linearGradient id="body" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f0f4fa"/>
+      <stop offset="100%" stop-color="#dbe4f0"/>
+    </linearGradient>
+
+    <!-- Bar gradients -->
+    <linearGradient id="bar1" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#60a5fa"/>
+    </linearGradient>
+    <linearGradient id="bar2" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#2563eb"/>
       <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+    <linearGradient id="bar3" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#1e40af"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+
+    <!-- Glow filter -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Subtle shadow -->
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0a1a3a" flood-opacity="0.35"/>
+    </filter>
+
+    <!-- Inner shadow for depth -->
+    <filter id="inset">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0a1a3a" flood-opacity="0.15"/>
+    </filter>
+
+    <!-- Wrench gradient -->
+    <linearGradient id="tool" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
     </linearGradient>
   </defs>
 
-  <!-- Background -->
+  <!-- Background with rounded corners -->
   <rect width="512" height="512" rx="96" fill="url(#bg)"/>
 
-  <!-- House roof -->
-  <path d="M256 80 L420 215 L92 215 Z" fill="white"/>
+  <!-- Subtle pattern overlay (grid dots) -->
+  <g opacity="0.04">
+    <circle cx="80" cy="80" r="3" fill="white"/>
+    <circle cx="160" cy="80" r="3" fill="white"/>
+    <circle cx="240" cy="80" r="3" fill="white"/>
+    <circle cx="320" cy="80" r="3" fill="white"/>
+    <circle cx="400" cy="80" r="3" fill="white"/>
+    <circle cx="80" cy="160" r="3" fill="white"/>
+    <circle cx="160" cy="160" r="3" fill="white"/>
+    <circle cx="320" cy="160" r="3" fill="white"/>
+    <circle cx="400" cy="160" r="3" fill="white"/>
+    <circle cx="80" cy="320" r="3" fill="white"/>
+    <circle cx="160" cy="320" r="3" fill="white"/>
+    <circle cx="320" cy="320" r="3" fill="white"/>
+    <circle cx="400" cy="320" r="3" fill="white"/>
+    <circle cx="80" cy="400" r="3" fill="white"/>
+    <circle cx="160" cy="400" r="3" fill="white"/>
+    <circle cx="240" cy="400" r="3" fill="white"/>
+    <circle cx="320" cy="400" r="3" fill="white"/>
+    <circle cx="400" cy="400" r="3" fill="white"/>
+  </g>
 
-  <!-- House body -->
-  <rect x="125" y="215" width="262" height="220" rx="4" fill="white"/>
+  <!-- Circular glow behind house -->
+  <circle cx="256" cy="265" r="160" fill="white" opacity="0.06"/>
+  <circle cx="256" cy="265" r="120" fill="white" opacity="0.04"/>
 
-  <!-- Bar chart inside house (management = ascending progress) -->
-  <rect x="168" y="340" width="44" height="72" rx="4" fill="#1e40af" opacity="0.5"/>
-  <rect x="234" y="296" width="44" height="116" rx="4" fill="#1e40af" opacity="0.7"/>
-  <rect x="300" y="252" width="44" height="160" rx="4" fill="#1e40af" opacity="0.9"/>
+  <!-- Wrench behind house (construction element) — rotated -->
+  <g transform="translate(256, 260) rotate(-30)" filter="url(#inset)">
+    <!-- Wrench handle -->
+    <rect x="-12" y="-20" width="24" height="180" rx="12" fill="url(#tool)" opacity="0.6"/>
+    <!-- Wrench head -->
+    <path d="M-22,-38 Q-22,-58 -6,-58 L6,-58 Q22,-58 22,-38 L22,-20 L-22,-20 Z" fill="url(#tool)" opacity="0.6"/>
+    <rect x="-6" y="-58" width="12" height="20" rx="3" fill="#0f2557" opacity="0.15"/>
+  </g>
 
-  <!-- Chimney (construction detail) -->
-  <rect x="340" y="108" width="32" height="80" rx="4" fill="white"/>
+  <!-- Ruler behind house (other side) -->
+  <g transform="translate(256, 260) rotate(25)" opacity="0.5">
+    <rect x="-10" y="-20" width="20" height="185" rx="4" fill="#f0f4fa" opacity="0.6"/>
+    <!-- Ruler marks -->
+    <rect x="-10" y="10" width="10" height="2" rx="1" fill="#1e40af" opacity="0.3"/>
+    <rect x="-10" y="30" width="14" height="2" rx="1" fill="#1e40af" opacity="0.3"/>
+    <rect x="-10" y="50" width="10" height="2" rx="1" fill="#1e40af" opacity="0.3"/>
+    <rect x="-10" y="70" width="14" height="2" rx="1" fill="#1e40af" opacity="0.3"/>
+    <rect x="-10" y="90" width="10" height="2" rx="1" fill="#1e40af" opacity="0.3"/>
+    <rect x="-10" y="110" width="14" height="2" rx="1" fill="#1e40af" opacity="0.3"/>
+    <rect x="-10" y="130" width="10" height="2" rx="1" fill="#1e40af" opacity="0.3"/>
+  </g>
+
+  <!-- Main house group with shadow -->
+  <g filter="url(#shadow)">
+    <!-- House body -->
+    <rect x="135" y="222" width="242" height="195" rx="6" fill="url(#body)"/>
+
+    <!-- Roof -->
+    <path d="M256 82 L415 222 L97 222 Z" fill="url(#roof)"/>
+
+    <!-- Roof ridge highlight -->
+    <path d="M256 82 L415 222" stroke="white" stroke-width="3" opacity="0.5" stroke-linecap="round"/>
+
+    <!-- Chimney -->
+    <rect x="338" y="115" width="30" height="80" rx="4" fill="url(#roof)"/>
+    <rect x="335" y="108" width="36" height="12" rx="3" fill="#e0e7f1"/>
+
+    <!-- Chimney smoke -->
+    <circle cx="353" cy="96" r="6" fill="white" opacity="0.25"/>
+    <circle cx="360" cy="82" r="8" fill="white" opacity="0.15"/>
+    <circle cx="350" cy="68" r="5" fill="white" opacity="0.1"/>
+  </g>
+
+  <!-- Window left -->
+  <rect x="160" y="248" width="48" height="48" rx="5" fill="#1e40af" opacity="0.2"/>
+  <rect x="163" y="251" width="42" height="42" rx="4" fill="#bfdbfe" opacity="0.6"/>
+  <line x1="184" y1="251" x2="184" y2="293" stroke="#1e40af" stroke-width="2" opacity="0.2"/>
+  <line x1="163" y1="272" x2="205" y2="272" stroke="#1e40af" stroke-width="2" opacity="0.2"/>
+  <!-- Window reflection -->
+  <rect x="166" y="254" width="15" height="15" rx="2" fill="white" opacity="0.3"/>
+
+  <!-- Door -->
+  <rect x="226" y="310" width="60" height="107" rx="6" fill="#1e40af" opacity="0.15"/>
+  <rect x="230" y="314" width="52" height="103" rx="4" fill="#dbe4f0"/>
+  <!-- Door handle -->
+  <circle cx="272" cy="368" r="4" fill="#f59e0b"/>
+  <!-- Door window -->
+  <rect x="238" y="322" width="36" height="28" rx="3" fill="#bfdbfe" opacity="0.5"/>
+
+  <!-- Bar chart (management element) — inside right window area -->
+  <g filter="url(#inset)">
+    <rect x="308" y="350" width="26" height="46" rx="4" fill="url(#bar1)"/>
+    <rect x="340" y="326" width="26" height="70" rx="4" fill="url(#bar2)"/>
+
+    <!-- Upward trend line -->
+    <polyline points="321,346 353,322" stroke="#60a5fa" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.7"/>
+    <!-- Arrow tip -->
+    <polygon points="353,322 345,326 349,332" fill="#60a5fa" opacity="0.7"/>
+  </g>
+
+  <!-- Window right (behind bars for context) -->
+  <rect x="300" y="248" width="68" height="48" rx="5" fill="#1e40af" opacity="0.2"/>
+  <rect x="303" y="251" width="62" height="42" rx="4" fill="#bfdbfe" opacity="0.4"/>
+  <line x1="334" y1="251" x2="334" y2="293" stroke="#1e40af" stroke-width="2" opacity="0.15"/>
+  <line x1="303" y1="272" x2="365" y2="272" stroke="#1e40af" stroke-width="2" opacity="0.15"/>
+
+  <!-- Foundation line -->
+  <rect x="120" y="413" width="272" height="6" rx="3" fill="white" opacity="0.15"/>
+
+  <!-- Sparkle accents (premium feel) -->
+  <g opacity="0.6">
+    <polygon points="436,100 440,112 452,112 442,120 446,132 436,124 426,132 430,120 420,112 432,112" fill="white" opacity="0.4"/>
+    <polygon points="96,380 99,388 107,388 101,393 103,401 96,396 89,401 91,393 85,388 93,388" fill="white" opacity="0.3" transform="scale(0.7) translate(50, 180)"/>
+    <circle cx="440" cy="380" r="3" fill="white" opacity="0.3"/>
+    <circle cx="80" cy="130" r="2" fill="white" opacity="0.25"/>
+  </g>
 </svg>
